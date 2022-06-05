@@ -1,0 +1,59 @@
+@use "reset";
+@include reset.reset-default-values();
+
+:root{
+  font-size: 16px;
+}
+* {
+  box-sizing: border-box;
+}
+body{
+  background-color: #f6f6f6b2;
+}
+
+.header{
+  padding: 1rem 2.5rem;
+  background-color: #E7F9FF;
+  .left-wrap{
+    display: flex;
+    column-gap: 1.5rem;
+    .start-btn{
+      background-color: #00FFB2;
+      border: 1px black solid;
+      border-radius: 50%;
+      width: 4rem;
+      height: 4rem;
+      font-size: 1.25rem;
+    }
+
+    .main-setting{
+      display: flex;
+    }
+    .label-wrap{
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+
+
+    .start-btn,
+    .new-array,
+    .more-setting,
+    input[type="range"]{
+      cursor: pointer;
+    }
+
+  }
+}
+
+.bar-container-1{
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  & > div{
+    margin: 5px;
+    background-color: #F65050;
+    height: 500px;
+    width: 20px;
+  }
+}
