@@ -14,7 +14,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, input {
   margin: 0;
   padding: 0;
   border: 0;
@@ -61,27 +61,36 @@ table {
 }
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
   background-color: rgba(246, 246, 246, 0.6980392157);
 }
 
 .header {
-  padding: 1rem 2.5rem;
+  box-shadow: 1px -1px 6px black;
   background-color: #E7F9FF;
+  padding: 1rem 2.5rem;
+  justify-content: space-around;
+  display: flex;
 }
 .header .left-wrap {
   display: flex;
-  column-gap: 1.5rem;
+  column-gap: 2.5rem;
 }
 .header .left-wrap .start-btn {
   background-color: #00FFB2;
-  border: 1px black solid;
   border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  font-size: 1.25rem;
+  width: 6rem;
+  height: 6rem;
+  font-size: 1.75rem;
+}
+.header .left-wrap .start-btn:hover {
+  transition-duration: 500ms;
+  background-color: black;
+  color: white;
 }
 .header .left-wrap .main-setting {
   display: flex;
+  margin-bottom: 1rem;
 }
 .header .left-wrap .label-wrap {
   display: flex;
@@ -91,20 +100,44 @@ body {
 .header .left-wrap .start-btn,
 .header .left-wrap .new-array,
 .header .left-wrap .more-setting,
-.header .left-wrap input[type=range] {
+.header .left-wrap input[type=range],
+.header .left-wrap .size-input:hover {
+  cursor: pointer;
+}
+.header .left-wrap .size-input:focus {
+  cursor: text;
+}
+.header .left-wrap .size-verbose:focus {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+.header .algo-wrap {
+  display: flex;
+  align-items: center;
+}
+.header .algo-wrap ul {
+  display: flex;
+  column-gap: 2rem;
+  font-size: 1.25rem;
+}
+.header .algo-wrap ul li {
   cursor: pointer;
 }
 
 .bar-container-1 {
   margin: 2rem 0;
+  padding: 0 2rem;
   display: flex;
   justify-content: center;
 }
 .bar-container-1 > div {
-  margin: 5px;
+  margin: 1px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
   background-color: #F65050;
-  height: 500px;
-  width: 20px;
+  width: 25%;
 }
 
 /*# sourceMappingURL=main.css.map */

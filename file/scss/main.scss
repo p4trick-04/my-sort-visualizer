@@ -7,6 +7,7 @@
 * {
   box-sizing: border-box;
 }
+
 body{
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f6f6f6b2;
@@ -29,15 +30,18 @@ body{
       height: 6rem;
       font-size: 1.75rem;
     }
+
     .start-btn:hover{
       transition-duration: 500ms;
       background-color: black;
       color: white;
     }
+
     .main-setting{
       display: flex;
       margin-bottom: 1rem;
     }
+
     .label-wrap{
       display: flex;
       justify-content: space-between;
@@ -47,10 +51,19 @@ body{
     .start-btn,
     .new-array,
     .more-setting,
-    input[type="range"]{
+    input[type="range"],
+    .size-input:hover{
       cursor: pointer;
     }
-
+    .size-input:focus{
+      cursor: text;
+    }
+    .size-verbose:focus{
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+      border-radius: 3px;
+    }
   }
 
   .algo-wrap{
@@ -69,9 +82,14 @@ body{
 
 .bar-container-1{
   margin: 2rem 0;
+  // the plan is there will be a "pseudo code" at the left bar
+  // so setting the bar-container padding to 20starem is the right choice
   padding: 0 2rem;
   display: flex;
   justify-content: center;
+
+  // uncomment this if I want the bar stick at the bottom together
+  // align-items: flex-end;
   & > div{
     margin: 1px;
     // border-radius: 2px;
