@@ -25,10 +25,11 @@
             
             <div class="range-bar-wrap">
               <div class="size-wrap">
-                <input type="range" id="size" min="5" max="100" value="50">
+                <input type="range" id="size" min="5" max="1000" value="50">
                 
                 <span>
-                  <input type="text" class="size-input" min="1" max="4">
+                  <!-- user input here -->
+                  <input type="text" class="size-input" minlength="5" maxlength="4">
                   <span>Elements</span>
                 </span>
               </div>
@@ -43,22 +44,51 @@
 
           </div>
 
-          <div class="other-setting">
-            <span class="more-setting">⚙️</span>
-          </div>
+          <div class="more-setting">⚙️</div>
         </div>
+
+
 
       </div>
 
       <div class="algo-wrap">
-        <ul>
+        <ul class="menu" style="border:1px solid black">
           <li>Quick</li>
           <li>Merge</li>
           <li>Heap</li>
           <li>Shell</li>
           <li>Insertion</li>
           <li>Selection</li>
+          <li class="menu-line"></li>
         </ul>
+      </div>
+
+    </div>
+
+
+    <div class="setting-display">
+      <div class="setting-contents">
+        <button class="exit-btn">❌</button>
+        <h1 class="title">Settings</h1>
+        <div>
+          <input type="checkbox">
+          <p>timer</p>
+        </div>
+        <div>
+          <input type="checkbox">
+          <p>ascending sort</p>
+        </div>
+        <div>
+          <input type="checkbox">
+          <p>descending sort</p>
+        </div>
+        <div>
+          <input type="checkbox">
+          <p>compare algorithm</p>
+        </div>
+        <div>
+          <p>array model</p>
+        </div>
       </div>
     </div>
 

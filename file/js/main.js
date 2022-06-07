@@ -2,16 +2,36 @@ const sizeBar = document.getElementById("size");
 const barContainer1 = document.querySelector(".bar-container-1");
 const newArray = document.querySelector(".new-array");
 const sizeInput = document.querySelector(".size-input");
+const moreSetting = document.querySelector(".more-setting");
+const settingDisplay = document.querySelector(".setting-display");
+const exitBtn = document.querySelector(".exit-btn");
+const menu = document.querySelector(".menu");
+const menu_List = menu.children;
+
 
 // set the sizeInput element "value attribute" the same as the sizeBar has
 sizeInput.value = sizeBar.value;
 
 // adjust the width according the text content
-sizeInput.style.width = String(Math.floor(getTextWidth(sizeInput))+10) + "px";
+sizeInput.style.width = String(Math.floor(getTextWidth(sizeInput))+2) + "px";
 
 let currSizeVal = parseInt(sizeBar.value);
 const maxValue = sizeBar.max;
 
+// get the gap value
+let colGap = parseFloat(window.getComputedStyle(menu).getPropertyValue("column-gap"));
+// console.log(colGap);
+
+// minus 1 to exclude this: <li class="menu-line"></li>
+for(let i=0; i<menu_List.length-1; i++){
+  menu_List[i].addEventListener("mouseenter", (e) => {
+    let menu = e.target;
+    console.log(menu);
+    let x = e.pageX;
+    let y = e.pageY;
+    console.log(`(${x},${y})`);
+  });
+}
 
 function setRandHeight(element){
   let rand = Math.floor(Math.random()*500);
@@ -47,6 +67,13 @@ sizeBar.addEventListener("input", e => {
   let resizedVal = parseInt(e.target.value);
   // console.log(`resized size= ${resizedVal} typeof(${typeof(resizedVal)})`);
   // console.log(`curr size= ${currSizeVal} typeof(${typeof(currSizeVal)})`);
+
+  sizeInput.value = resizedVal;
+  let width = Math.floor(getTextWidth(sizeInput));
+  // add padding to adjust the size
+  let widthInPx = (width + 2) + "px";
+  // console.log(widthInPx);
+  sizeInput.style.width = widthInPx;
 
   // if the the user want to increase the length
   if(resizedVal>currSizeVal){
@@ -99,7 +126,7 @@ sizeInput.addEventListener("click",() => {
 
     let width = Math.floor(getTextWidth(e.target));
     // add padding to adjust the size
-    let widthInPx = (width + 10) + "px";
+    let widthInPx = (width + 2) + "px";
     // console.log(widthInPx);
     e.target.style.width = widthInPx;
 
@@ -107,6 +134,15 @@ sizeInput.addEventListener("click",() => {
 
 });
 
+// setting button <div class="more-setting">⚙️</div>
+moreSetting.addEventListener("click", () => {
+  settingDisplay.style.display = "flex";
+  moreSetting.classList.add("spin");
+  exitBtn.addEventListener("click", () => {
+    settingDisplay.style.display = "none";
+    moreSetting.classList.remove("spin");
+  });
+});
 
 /**
  * returns the width of child text of any DOM node as a float

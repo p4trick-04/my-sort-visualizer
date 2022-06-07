@@ -1,4 +1,4 @@
-/*
+/* copy this ...
 @use "reset";
 @include reset.reset-default-values();
 */
@@ -65,18 +65,30 @@ body {
   background-color: rgba(246, 246, 246, 0.6980392157);
 }
 
+.container {
+  position: relative;
+}
+
+.spin {
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 .header {
   box-shadow: 1px -1px 6px black;
   background-color: #E7F9FF;
   padding: 1rem 2.5rem;
-  justify-content: space-around;
   display: flex;
+  justify-content: space-around;
 }
 .header .left-wrap {
   display: flex;
   column-gap: 2.5rem;
 }
 .header .left-wrap .start-btn {
+  border: 0;
   background-color: #00FFB2;
   border-radius: 50%;
   width: 6rem;
@@ -104,26 +116,97 @@ body {
 .header .left-wrap .size-input:hover {
   cursor: pointer;
 }
+.header .left-wrap .size-input {
+  background-color: transparent;
+}
 .header .left-wrap .size-input:focus {
+  background-color: white;
   cursor: text;
 }
-.header .left-wrap .size-verbose:focus {
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-  border-radius: 3px;
+.header .left-wrap .more-setting {
+  width: max-content;
+}
+.header .left-wrap .more-setting:hover {
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  background-color: rgba(100, 100, 100, 0.3294117647);
+  border-radius: 50%;
 }
 .header .algo-wrap {
   display: flex;
   align-items: center;
 }
-.header .algo-wrap ul {
+.header .algo-wrap .menu {
+  position: relative;
   display: flex;
   column-gap: 2rem;
   font-size: 1.25rem;
 }
-.header .algo-wrap ul li {
+.header .algo-wrap .menu li {
   cursor: pointer;
+}
+.header .algo-wrap .menu .menu-line {
+  background-color: black;
+  width: 51px;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+}
+
+.setting-display {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.setting-display .setting-contents {
+  position: absolute;
+  z-index: 99;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px black;
+}
+.setting-display .setting-contents .exit-btn {
+  border: 0;
+  background-color: rgb(238, 238, 238);
+  border-radius: 50%;
+  padding: 1rem;
+  font-size: 2rem;
+  position: absolute;
+  right: 0;
+}
+.setting-display .setting-contents .exit-btn:hover {
+  cursor: pointer;
+  background-color: rgba(100, 100, 100, 0.3294117647);
+}
+.setting-display .setting-contents .title {
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 2rem;
+}
+.setting-display .setting-contents > div {
+  display: flex;
+  margin: 1rem 3rem;
+}
+.setting-display .setting-contents input {
+  margin-right: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+}
+.setting-display .setting-contents input:hover {
+  background-color: rgba(128, 128, 128, 0.795);
+  cursor: pointer;
+}
+.setting-display .setting-contents p {
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .bar-container-1 {
@@ -138,6 +221,15 @@ body {
   border-bottom-right-radius: 2px;
   background-color: #F65050;
   width: 25%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

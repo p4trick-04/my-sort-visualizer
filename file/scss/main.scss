@@ -1,9 +1,14 @@
 @use "reset";
 @include reset.reset-default-values();
 
+$bg-color-hover-gray: #64646454;
+
+// @mixin all-zero-pos($top,$right,$bottom,$left:rue)
+
 :root{
   font-size: 16px;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -13,17 +18,35 @@ body{
   background-color: #f6f6f6b2;
 }
 
+.container{
+  position: relative;
+}
+
+.spin{
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 .header{
   box-shadow: 1px -1px 6px black;
   background-color: #E7F9FF;
   padding: 1rem 2.5rem;
-  justify-content: space-around;
+
   display: flex;
+  justify-content: space-around;
 
   .left-wrap{
     display: flex;
     column-gap: 2.5rem;
     .start-btn{
+      border: 0;
+      &:hover{
+        transition-duration: 500ms;
+        background-color: black;
+        color: white;
+      }
       background-color: #00FFB2;
       border-radius: 50%;
       width: 6rem;
@@ -31,10 +54,10 @@ body{
       font-size: 1.75rem;
     }
 
-    .start-btn:hover{
-      transition-duration: 500ms;
-      background-color: black;
-      color: white;
+    .new-array{
+      &:hover{
+
+      }
     }
 
     .main-setting{
@@ -55,27 +78,114 @@ body{
     .size-input:hover{
       cursor: pointer;
     }
-    .size-input:focus{
-      cursor: text;
+
+    .size-input{
+      background-color: transparent;
+      // if the size-input clicked
+      &:focus{
+        background-color: white;
+        cursor: text;
+      }
     }
-    .size-verbose:focus{
-      background-color: white;
-      color: black;
-      border: 1px solid black;
-      border-radius: 3px;
+
+    .more-setting{
+      width: max-content;
+
+      &:hover{
+        animation-name: spin;
+        animation-duration: 5000ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        background-color: $bg-color-hover-gray;
+        border-radius: 50%;
+      }
     }
   }
+  
 
   .algo-wrap{
     display: flex;
     align-items: center;
-    ul{
+    .menu{
+      position: relative;
       display: flex;
       column-gap: 2rem;
       font-size: 1.25rem;
       li{
         cursor: pointer;
       }
+      .menu-line{
+        background-color: black;
+        width: 51px;
+        height: 2px;
+
+        position: absolute;
+        bottom: 0;
+      }
+    }
+  }
+
+}
+
+
+.setting-display{
+  position: absolute;
+  top:0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  // display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  
+  .setting-contents{
+    position: absolute;
+    z-index: 99;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px black;
+    $w: 1.5rem;
+    $h: 1.5rem;
+    .exit-btn{
+      &:hover{
+        cursor: pointer;
+        background-color: $bg-color-hover-gray;
+      }
+      border: 0;
+      background-color: rgb(238, 238, 238);
+      border-radius: 50%;
+      padding: 1rem;
+      font-size: 2rem;
+
+      position: absolute;
+      right: 0;
+    }
+    
+    .title{
+      margin: 1rem 0;
+      text-align: center;
+      font-size: 2rem;
+
+    }
+    & > div{
+      display: flex;
+      margin: 1rem 3rem;
+    }
+    & input{
+      &:hover{
+        background-color: rgba(128, 128, 128, 0.795);
+        cursor: pointer;
+      }
+      margin-right: 1rem;
+      width: $w;
+      height: $h;
+      border-radius: 50%;
+    }
+    & p{
+      font-weight: 600;
+      font-size: $w;
     }
   }
 }
@@ -102,3 +212,13 @@ body{
   }
 }
 
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+
+}
