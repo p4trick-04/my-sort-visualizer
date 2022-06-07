@@ -1,0 +1,4 @@
+# what I learned from this project
+
+- spin animation in css
+https://codepen.io/teerapuch/pen/vLJXeR?editors=1100
