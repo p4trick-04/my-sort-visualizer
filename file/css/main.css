@@ -76,6 +76,10 @@ body {
   animation-iteration-count: infinite;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .header {
   box-shadow: 1px -1px 6px black;
   background-color: #E7F9FF;
@@ -98,7 +102,7 @@ body {
 .header .left-wrap .start-btn:hover {
   transition-duration: 500ms;
   background-color: black;
-  color: white;
+  color: whitesmoke;
 }
 .header .left-wrap .main-setting {
   display: flex;
@@ -145,7 +149,13 @@ body {
 }
 .header .algo-wrap .menu li {
   padding: 0 1rem;
+}
+.header .algo-wrap .menu li:hover {
   cursor: pointer;
+}
+.header .algo-wrap .menu li:active {
+  transform: scale(0.9);
+  transition-duration: 50ms;
 }
 .header .algo-wrap .menu .menu-line {
   background-color: black;
@@ -216,10 +226,10 @@ body {
   margin: 2rem 0;
   padding: 0 2rem;
   display: flex;
+  column-gap: 1px;
   justify-content: center;
 }
 .bar-container-1 > div {
-  margin: 1px;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   background-color: #F65050;

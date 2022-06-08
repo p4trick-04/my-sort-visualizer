@@ -29,6 +29,10 @@ body{
   animation-iteration-count: infinite;
 }
 
+.no-margin{
+  margin: 0;
+}
+
 .header{
   box-shadow: 1px -1px 6px black;
   background-color: #E7F9FF;
@@ -45,7 +49,7 @@ body{
       &:hover{
         transition-duration: 500ms;
         background-color: black;
-        color: white;
+        color: whitesmoke;
       }
       background-color: #00FFB2;
       border-radius: 50%;
@@ -113,13 +117,19 @@ body{
       font-size: 1.25rem;
       li{
         padding: 0 1rem;
-        cursor: pointer;
+        &:hover{
+          cursor: pointer;
+        }
+        &:active{
+          transform: scale(0.9);
+          transition-duration: 50ms;
+        }
       }
       .menu-line{
         background-color: black;
         display: none;
         height: 2px;
-
+      
         transition: all 750ms ease-out;
 
         position: absolute;
@@ -201,12 +211,12 @@ body{
   // so setting the bar-container padding to 20starem is the right choice
   padding: 0 2rem;
   display: flex;
+  column-gap: 1px;
   justify-content: center;
 
   // uncomment this if I want the bar stick at the bottom together
   // align-items: flex-end;
   & > div{
-    margin: 1px;
     // border-radius: 2px;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
