@@ -109,18 +109,23 @@ body{
     .menu{
       position: relative;
       display: flex;
-      column-gap: 2rem;
+      // column-gap: 2rem;
       font-size: 1.25rem;
       li{
+        padding: 0 1rem;
         cursor: pointer;
       }
       .menu-line{
         background-color: black;
-        width: 51px;
+        display: none;
         height: 2px;
+
+        transition: all 750ms ease-out;
 
         position: absolute;
         bottom: 0;
+        right: 0;
+        left: 0;
       }
     }
   }

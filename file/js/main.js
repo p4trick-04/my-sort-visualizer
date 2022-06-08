@@ -1,5 +1,6 @@
 const sizeBar = document.getElementById("size");
 const barContainer1 = document.querySelector(".bar-container-1");
+const bar_List = barContainer1.children;
 const newArray = document.querySelector(".new-array");
 const sizeInput = document.querySelector(".size-input");
 const moreSetting = document.querySelector(".more-setting");
@@ -7,13 +8,14 @@ const settingDisplay = document.querySelector(".setting-display");
 const exitBtn = document.querySelector(".exit-btn");
 const menu = document.querySelector(".menu");
 const menu_List = menu.children;
+const menuLine = document.querySelector(".menu-line");
 
 
 // set the sizeInput element "value attribute" the same as the sizeBar has
 sizeInput.value = sizeBar.value;
 
 // adjust the width according the text content
-sizeInput.style.width = String(Math.floor(getTextWidth(sizeInput))+2) + "px";
+adjustInputText(sizeInput,2);
 
 let currSizeVal = parseInt(sizeBar.value);
 const maxValue = sizeBar.max;
@@ -22,127 +24,106 @@ const maxValue = sizeBar.max;
 let colGap = parseFloat(window.getComputedStyle(menu).getPropertyValue("column-gap"));
 // console.log(colGap);
 
-// minus 1 to exclude this: <li class="menu-line"></li>
-for(let i=0; i<menu_List.length-1; i++){
-  menu_List[i].addEventListener("mouseenter", (e) => {
-    let menu = e.target;
-    console.log(menu);
-    let x = e.pageX;
-    let y = e.pageY;
-    console.log(`(${x},${y})`);
+
+function getOffset(el) {
+  const rect = el.getBoundingClientRect();
+  return {
+    left: rect.left + window.scrollX,
+    top: rect.top + window.scrollY
+  };
+}
+
+// algo preference animation
+{
+
+  let leftDef=0,widthDef=0;
+  let leftAnimation,widthAnimation;
+  // is first time hover?
+  let isFirstTime=true;
+  // minus 1 to exclude this: <li class="menu-line"></li>
+  for(let i=0; i<menu_List.length-1; i++){
+    /* information
+    https://stackoverflow.com/questions/442404/retrieve-the-position-x-y-of-an-html-element
+
+    https://stackoverflow.com/questions/11634770/get-position-offset-of-element-relative-to-a-parent-container
+    */
+
+
+    // left = abs(curr-prev);
+    menu_List[i].addEventListener("mouseover", (e) => {
+      let menu = e.target;
+      console.log(menu);
+      console.log(menu.offsetLeft);
+
+      // show the line
+      menuLine.style.display = "block";
+      
+      // set the with same as the hovered element
+      // reason why we do this weird arithmetic operation:
+      // 16*2 is the total of left and right padding. We want to exclude padding so that we get the actual content width
+      // so with that said we need to substract the total width with the paddings
+      // menu.offsetWidth is the total width(which is paddings included)
+      widthAnimation = menu.offsetWidth-16*2;
+      menuLine.style.width = menu.offsetWidth-16*2 + "px";
+      
+      // adjust the coordinate
+      leftAnimation = menu.offsetLeft+16;
+      menuLine.style.left = menu.offsetLeft+16 + "px";
+    });
+    
+    menu_List[i].addEventListener("click", (e) => {
+      console.log("clicked");
+
+      // then we can modify the line
+      menuLine.style.width = widthAnimation + "px";
+      menuLine.style.left = leftAnimation + "px";
+
+      widthDef = widthAnimation;
+      leftDef = leftAnimation;
+      isFirstTime=false;
+    });
+
+  }
+  menu.addEventListener("mouseleave", (e) => {
+    if(isFirstTime===true){
+      menuLine.style.display = "none"
+    }
+    menuLine.style.width = widthDef + "px";
+    menuLine.style.left = leftDef + "px";
   });
 }
 
+
+/**
+ * get random random within given interval
+ *=
+ */
+function getRandNum(num){
+  return Math.floor(Math.random()*num);
+}
+
 function setRandHeight(element){
-  let rand = Math.floor(Math.random()*500);
+  let rand = getRandNum(500);
 
   // if the random num < 30, then (30-rand) is for the difference
   // rand + difference will always equal 30
-  if(rand < 30) rand += (30-rand);
+  if(rand < 30) rand = getRandNum(30) + (30-rand);
   element.style.height = rand+"px";
 }
 
 function appendChildRandom(element,i){
-  let rand = Math.floor(Math.random()*10);
+  let rand = getRandNum(10);
   if(rand<5){
     // insert at the end
     barContainer1.appendChild(element);
   }else if(rand>5){
     // insert random
-    barContainer1.insertBefore(element,barContainer1.children[Math.floor(Math.random()*(i-1))]);
+    barContainer1.insertBefore(element,bar_List[getRandNum(i-1)]);
   }else{
     // insert at front
-    barContainer1.insertBefore(element,barContainer1.children[0]);
+    barContainer1.insertBefore(element,bar_List[0]);
   }
 }
-
-// set the random height for default length
-for(let i=0; i<currSizeVal; i++){
-  setRandHeight(barContainer1.children[i]);
-}
-
-// resize the length of the array
-sizeBar.addEventListener("input", e => {
-  // get the value
-  let resizedVal = parseInt(e.target.value);
-  // console.log(`resized size= ${resizedVal} typeof(${typeof(resizedVal)})`);
-  // console.log(`curr size= ${currSizeVal} typeof(${typeof(currSizeVal)})`);
-
-  sizeInput.value = resizedVal;
-  let width = Math.floor(getTextWidth(sizeInput));
-  // add padding to adjust the size
-  let widthInPx = (width + 2) + "px";
-  // console.log(widthInPx);
-  sizeInput.style.width = widthInPx;
-
-  // if the the user want to increase the length
-  if(resizedVal>currSizeVal){
-    // this loop is needed to prevent jumping(when the user immidiately adjust the length to maximum or min, for example)
-    for(let i=currSizeVal; i<resizedVal; i++){
-      // console.log("larger");
-      currSizeVal=resizedVal;
-      let div = document.createElement("div");
-      setRandHeight(div);
-      appendChildRandom(div,i);
-    }
-  }
-  // else if the user want ot decrease the length
-  else if(resizedVal<currSizeVal){
-    for(let i=currSizeVal; i>resizedVal; i--){
-      // console.log("lesser");
-
-      // 1. this will generate random number between mininum length and current length.
-      // 2. reason why we do this because we want to remove the bar(div) randomly with a valid index of course(meaning: if above statement(1) is satisfied, then it's a valid index to remove (the bar)+ it's a random number)
-      // Math.floor(Math.random()*(i-1))
-
-      barContainer1.removeChild(barContainer1.children[Math.floor(Math.random()*(i-1))]);
-      currSizeVal=resizedVal;
-    }
-  }
-  // console.log("curr size 'end'",currSizeVal,'\n\n');
-});
-
-// reshuffle button
-newArray.addEventListener("click", () => {
-  console.log(newArray);
-  for(let i=0; i<barContainer1.childElementCount; i++){
-    // this is fine (random index meaning random shuffle)
-    let rand = Math.floor(Math.random()*barContainer1.childElementCount);
-    setRandHeight(barContainer1.children[rand]);
-
-    // this is fine too (linear from 0 till n, where n is the length of the array)
-    // setRandHeight(barContainer1.children[i]);
-
-    // they act similar though
-  }
-});
-
-// let the user custom the length of the array through input size bar
-sizeInput.addEventListener("click",() => {
-  // console.log(sizeBar," clicked");
-  sizeInput.addEventListener("input", (e) => {
-    let val = e.target.value;
-    // console.log(val);
-
-    let width = Math.floor(getTextWidth(e.target));
-    // add padding to adjust the size
-    let widthInPx = (width + 2) + "px";
-    // console.log(widthInPx);
-    e.target.style.width = widthInPx;
-
-  },false);
-
-});
-
-// setting button <div class="more-setting">⚙️</div>
-moreSetting.addEventListener("click", () => {
-  settingDisplay.style.display = "flex";
-  moreSetting.classList.add("spin");
-  exitBtn.addEventListener("click", () => {
-    settingDisplay.style.display = "none";
-    moreSetting.classList.remove("spin");
-  });
-});
 
 /**
  * returns the width of child text of any DOM node as a float
@@ -164,3 +145,105 @@ moreSetting.addEventListener("click", () => {
   let textMeasurement = context.measureText(getInputTxt);
   return textMeasurement.width;
 }
+
+function adjustInputText(inputTxt,extraPadding=0){
+  let width = Math.floor(getTextWidth(inputTxt));
+  // add padding to adjust the size
+  let widthInPx = (width + extraPadding) + "px";
+
+  // console.log(widthInPx);
+  inputTxt.style.width = widthInPx;
+}
+
+// set the random height for default length
+for(let i=0; i<currSizeVal; i++){
+  setRandHeight(bar_List[i]);
+}
+
+// resize the length of the array
+sizeBar.addEventListener("input", e => {
+  // get the value
+  let resizedVal = parseInt(e.target.value);
+  // console.log(`resized size= ${resizedVal} typeof(${typeof(resizedVal)})`);
+  // console.log(`curr size= ${currSizeVal} typeof(${typeof(currSizeVal)})`);
+
+  sizeInput.value = resizedVal;
+
+  adjustInputText(sizeInput,2);
+
+  // if the the user want to increase the length
+  if(resizedVal>currSizeVal){
+    // this loop is needed to prevent jumping(when the user immidiately adjust the length to maximum or min, for example)
+    for(let i=currSizeVal; i<resizedVal; i++){
+      // console.log("larger");
+      currSizeVal=resizedVal;
+      let div = document.createElement("div");
+      setRandHeight(div);
+      appendChildRandom(div,i);
+    }
+  }
+  // else if the user want to decrease the length
+  else if(resizedVal<currSizeVal){
+    for(let i=currSizeVal; i>resizedVal; i--){
+      // console.log("lesser");
+
+      // 1. this will generate random number between mininum length and current length.
+      // 2. reason why we do this because we want to remove the bar(div) randomly with a valid index of course(meaning: if above statement(1) is satisfied, then it's a valid index to remove (the bar)+ it's a random number)
+      // Math.floor(Math.random()*(i-1))
+
+      barContainer1.removeChild(bar_List[getRandNum(i-1)]);
+      currSizeVal=resizedVal;
+    }
+  }
+  // console.log("curr size 'end'",currSizeVal,'\n\n');
+});
+
+// reshuffle button
+{
+  function shuffle(){
+    // O(n) where n is the length of the array
+    for(let i=0; i<barContainer1.childElementCount; i++){
+      // this is fine (random index meaning random shuffle)
+      let rand = getRandNum(barContainer1.childElementCount);
+      setRandHeight(bar_List[rand]);
+
+      // this is fine too (linear from 0 till n, where n is the length of the array)
+      // setRandHeight(barContainer1.children[i]);
+
+      // they act similar though
+    }
+  }
+
+  newArray.addEventListener("mousedown", () => {
+    // console.log(newArray);
+    let setInt = setInterval(shuffle,50);
+    newArray.addEventListener("mouseup",() => {
+      clearTimeout(setInt);
+    });
+  });
+
+
+  newArray.addEventListener("click", () => {
+    shuffle();
+  });
+}
+
+// let the user custom the length of the array through input size bar
+sizeInput.addEventListener("click",() => {
+  // console.log(sizeBar," clicked");
+  sizeInput.addEventListener("input", (e) => {
+    const target = e.target;
+    adjustInputText(target,2);
+  },false);
+});
+
+// setting button <div class="more-setting">⚙️</div>
+moreSetting.addEventListener("click", () => {
+  settingDisplay.style.display = "flex";
+  moreSetting.classList.add("spin");
+  exitBtn.addEventListener("click", () => {
+    settingDisplay.style.display = "none";
+    moreSetting.classList.remove("spin");
+  });
+});
+

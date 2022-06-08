@@ -141,18 +141,21 @@ body {
 .header .algo-wrap .menu {
   position: relative;
   display: flex;
-  column-gap: 2rem;
   font-size: 1.25rem;
 }
 .header .algo-wrap .menu li {
+  padding: 0 1rem;
   cursor: pointer;
 }
 .header .algo-wrap .menu .menu-line {
   background-color: black;
-  width: 51px;
+  display: none;
   height: 2px;
+  transition: all 750ms ease-out;
   position: absolute;
   bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 .setting-display {
