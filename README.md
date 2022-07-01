@@ -1,1 +1,1 @@
-# mys-sort-visualizer
+# my-sort-visualizer

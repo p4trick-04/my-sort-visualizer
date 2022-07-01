@@ -1,0 +1,7 @@
+# design inspiration
+
+- spin animation
+https://codepen.io/teerapuch/pen/vLJXeR?editors=1100
+
+- line animation navbar
+https://alvarotrigo.com/blog/
