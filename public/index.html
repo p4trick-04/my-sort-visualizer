@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sort</title>
     <link rel="icon" href="favicon_io/favicon-32x32.png">
-    <link rel="stylesheet" href="styles/css/main.css">
+    <link rel="stylesheet" href="../src/styles/css/main.css">
   </head>
 
   <body>
@@ -21,14 +21,12 @@
 
           <div class="setting-section">
             <div class="main-setting">
-              <div class="label-wrap">
+              <div>
                 <label for="size">Size</label>
-                <label for="speed">Speed</label>
-              </div>
-              
-              <div class="range-bar-wrap">
+
                 <div class="size-wrap">
-                  <input type="range" id="size" min="5" max="200" value="50">
+                  <!-- range bar input -->
+                  <input type="range" class="size-range" min="5" max="200" value="50">
                   
                   <span>
                     <!-- user input here -->
@@ -36,7 +34,10 @@
                     <span>Elements</span>
                   </span>
                 </div>
+              </div>
 
+              <div>
+                <label for="speed">Speed</label>
                 <div class="speed-wrap">
                   <input type="range" id="speed" value="1">
                   <span>
@@ -44,7 +45,6 @@
                   </span>
                 </div>
               </div>
-
             </div>
 
             <div class="more-setting">⚙️</div>
@@ -158,6 +158,6 @@
     </div>
     <!-- end container -->
 
-  <script src="js/main.js" type="module"></script>
+  <script src="../built/index.js"></script>
   </body>
 </html>

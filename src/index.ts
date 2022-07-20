@@ -1,23 +1,27 @@
-import * as util from "./utils.js"
-const sizeBar = document.getElementById("size");
-const barContainer1 = document.querySelector(".bar-container-1");
-const bar_List = barContainer1.children;
-const newArray = document.querySelector(".new-array");
-const sizeInput = document.querySelector(".size-input");
-const moreSetting = document.querySelector(".more-setting");
+import {getRandNum,setRandHeight} from "./utils"
+const sizeRange: HTMLInputElement = document.querySelector("size-range");
+const sizeInput: HTMLInputElement = document.querySelector(".size-input");
 
-// set the sizeInput element "value attribute" the same as the sizeBar has
-sizeInput.value = bar_List.length;
+const barContainer1: HTMLElement = document.querySelector(".bar-container-1");
+const bar_List: HTMLCollection = barContainer1.children;
+const newArray: HTMLElement = document.querySelector(".new-array");
+const moreSetting: HTMLElement = document.querySelector(".more-setting");
+
+
+
+// set the sizeInput element "value attribute" the same as the sizeRange has
+sizeInput.value = String(bar_List.length);
 
 // adjust the width according the text content
 adjustInputText(sizeInput,2);
 
-let currSizeVal = bar_List.length;
+let currSizeVal: number = bar_List.length;
 
 // initial array
 // set all of the array with random height
 for(let i=0; i<currSizeVal; i++){
-  setRandHeight(bar_List[i]);
+  const bar = barContainer1.children[i] as HTMLElement
+  setRandHeight(bar);
 }
 
 
@@ -25,16 +29,16 @@ for(let i=0; i<currSizeVal; i++){
 
 
 /**
- * insert something in three ways
+ * insert element in three ways
  */
-function appendChildRandom(element,interval){
-  let rand = util.getRandNum(10);
+function appendChildRandom(element: HTMLElement,interval: number): void{
+  let rand = getRandNum(10);
   if(rand<5){
     // insert at the end
     barContainer1.appendChild(element);
   }else if(rand>5){
     // insert random
-    barContainer1.insertBefore(element,bar_List[util.getRandNum(interval-1)]);
+    barContainer1.insertBefore(element,bar_List[getRandNum(interval-1)]);
   }else{
     // insert at the beginning
     barContainer1.insertBefore(element,bar_List[0]);
@@ -76,13 +80,13 @@ function adjustInputText(inputTxt,extraPadding=0){
 
 // navbar line animation
 {
-  const menu = document.querySelector(".menu");
-  const menu_List = menu.children;
-  const menuLine = document.querySelector(".menu-line");
-  let leftDef=0,widthDef=0;
-  let leftAnimation,widthAnimation;
+  const menu: HTMLElement = document.querySelector(".menu");
+  const menu_List: HTMLCollection = menu.children;
+  const menuLine: HTMLElement = document.querySelector(".menu-line");
+  let leftDef: number=0, widthDef: number=0;
+  let leftAnimation: number, widthAnimation: number;
   // is first time hover?
-  let isFirstTime=true;
+  let isFirstTime: boolean=true;
 
   // minus 1 to exclude this: <li class="menu-line"></li>
   for(let i=0; i<menu_List.length-1; i++){
@@ -92,8 +96,8 @@ function adjustInputText(inputTxt,extraPadding=0){
     */
 
 
-    menu_List[i].addEventListener("mouseover", (e) => {
-      let menu = e.target;
+    menu_List[i].addEventListener("mouseover", (e: Event) => {
+      let menu = e.target as HTMLInputElement;
       console.log(menu);
       console.log(menu.offsetLeft);
 
@@ -136,13 +140,13 @@ function adjustInputText(inputTxt,extraPadding=0){
 
 
 
-function resizeArray(resizedVal){
+function resizeArray(resizedVal: number): void{
   // if the the user want to increase the array
   if(resizedVal>currSizeVal){
-    // this loop is needed to prevent jumping(when the user immediately adjust the length to largest or smallest)
+    // this loop is needed to prevent jumping(when the user immediately adjust the length to the largest or smallest)
     for(let i=currSizeVal; i<resizedVal; i++){
       currSizeVal=resizedVal;
-      let div = document.createElement("div");
+      let div: HTMLDivElement = document.createElement("div");
       setRandHeight(div);
       appendChildRandom(div,i);
     }
@@ -152,20 +156,21 @@ function resizeArray(resizedVal){
     for(let i=currSizeVal; i>resizedVal; i--){
 
       // remove the element randomly.
-      barContainer1.removeChild(bar_List[util.getRandNum(i-1)]);
+      barContainer1.removeChild(bar_List[getRandNum(i-1)]);
       currSizeVal=resizedVal;
     }
   }
 }
 
 // resize the length of the array
-sizeBar.addEventListener("input", e => {
+sizeRange.addEventListener("input", (e: Event) => {
+  const target = e.target as HTMLInputElement;
   // get the value
-  let resizedVal = parseInt(e.target.value);
+  let resizedVal = parseInt(target.value);
   // console.log(`resized size= ${resizedVal} typeof(${typeof(resizedVal)})`);
   // console.log(`curr size= ${currSizeVal} typeof(${typeof(currSizeVal)})`);
 
-  sizeInput.value = resizedVal;
+  sizeInput.value = String(resizedVal);
 
   adjustInputText(sizeInput,2);
 
@@ -174,40 +179,39 @@ sizeBar.addEventListener("input", e => {
 });
 
 // reshuffle button
-{
-  function shuffle(){
-    for(let i=0; i<barContainer1.childElementCount; i++){
-      // this is fine (random index meaning random shuffle)
-      let rand = util.getRandNum(barContainer1.childElementCount);
-      setRandHeight(bar_List[rand]);
+function shuffle(): void{
+  for(let i=0; i<barContainer1.childElementCount; i++){
+    // this is fine (random index meaning random shuffle)
+    let rand = getRandNum(barContainer1.childElementCount);
+    setRandHeight(bar_List[rand] as HTMLElement) ;
 
-      // this is fine too (linear from 0 till n)
-      // setRandHeight(barContainer1.children[i]);
+    // this is fine too (linear from 0 till n)
+    // setRandHeight(barContainer1.children[i]);
 
-      // both have the same purpose
-    }
+    // both have the same purpose
   }
-
-  newArray.addEventListener("mousedown", () => {
-    // console.log(newArray);
-    let setInt = setInterval(shuffle,50);
-    newArray.addEventListener("mouseup",() => {
-      clearTimeout(setInt);
-    });
-  });
-
-
-  newArray.addEventListener("click", () => {
-    shuffle();
-  });
 }
+
+newArray.addEventListener("mousedown", () => {
+  // console.log(newArray);
+  let setInt = setInterval(shuffle,50);
+  newArray.addEventListener("mouseup",() => {
+    clearTimeout(setInt);
+  });
+});
+
+
+newArray.addEventListener("click", () => {
+  shuffle();
+});
+
 
 // let the user custom the length of the array through input
 sizeInput.addEventListener("click",() => {
-  const maxValue = sizeBar.max;
-  // console.log(sizeBar," clicked");
+  const maxValue = sizeRange.max;
+  // console.log(sizeRange," clicked");
   sizeInput.addEventListener("input", (e) => {
-    const target = e.target;
+    const target = e.target as HTMLInputElement;
     if(target.value>maxValue){
       sizeInput.value = maxValue;
       target.value = maxValue;
@@ -215,16 +219,16 @@ sizeInput.addEventListener("click",() => {
     console.log(target.value);
 
     adjustInputText(target,2);
-    resizeArray(target.value);
+    resizeArray(Number(target.value));
   },false);
 });
 
-const checkBox_List = document.querySelectorAll("input[type='checkbox']")
+const checkBox_List: NodeList = document.querySelectorAll("input[type='checkbox']")
 
 // setting button <div class="more-setting">⚙️</div>
 moreSetting.addEventListener("click", () => {
-  const settingDisplay = document.querySelector(".setting-display");
-  const exitBtn = settingDisplay.querySelector(".exit-btn");
+  const settingDisplay: HTMLElement = document.querySelector(".setting-display");
+  const exitBtn: HTMLElement = settingDisplay.querySelector(".exit-btn");
   
   settingDisplay.style.display = "flex";
   moreSetting.classList.add("spin");
@@ -240,8 +244,9 @@ moreSetting.addEventListener("click", () => {
     // });
   // checkBox_List[3] is the gap checkbox
   for(let i=0; i<checkBox_List.length; i++){
-    checkBox_List[i].addEventListener("click", (e) => {
-      const target = e.target;
+    checkBox_List[i].addEventListener("click", (e: Event) => {
+      const target = e.target as HTMLInputElement;
+
       const classNamae = target.className;
       console.log(classNamae);
       if(classNamae==="gap"){
