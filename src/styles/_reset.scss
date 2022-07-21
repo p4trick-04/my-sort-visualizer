@@ -1,7 +1,7 @@
 // import the file --> @use "reset"
 // use it --> @include reset.reset-default-values();
 
-/* copy this ...
+/*
 @use "reset";
 @include reset.reset-default-values();
 */
@@ -26,6 +26,10 @@
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+  }
+  
+  a {
+    text-decoration: none !important;
   }
 
   /* HTML5 display-role reset for older browsers */

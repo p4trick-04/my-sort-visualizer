@@ -1,3 +1,4 @@
+
 @use "reset";
 @include reset.reset-default-values();
 
@@ -33,7 +34,7 @@ body{
   margin: 0;
 }
 
-.header{
+header{
   box-shadow: 1px -1px 6px black;
   background-color: #E7F9FF;
   padding: 1rem 2.5rem;
@@ -85,7 +86,7 @@ body{
     }
 
     .size-input{
-      background-color: transparent;
+      // background-color: transparent;
       // if the size-input clicked
       &:focus{
         background-color: white;
@@ -101,24 +102,20 @@ body{
         animation-duration: 5000ms;
         animation-timing-function: linear;
         animation-iteration-count: infinite;
-        background-color: $bg-color-hover-gray;
-        border-radius: 50%;
       }
     }
 
   }
   
-
   .algo-wrap{
     display: flex;
     align-items: center;
-    .menu{
+    .algo-menu{
       position: relative;
       display: flex;
-      // column-gap: 2rem;
+      column-gap: 1rem;
       font-size: 1.25rem;
       li{
-        padding: 0 1rem;
         &:hover{
           cursor: pointer;
         }
@@ -127,7 +124,7 @@ body{
           transition-duration: 50ms;
         }
       }
-      .menu-line{
+      .algo-menu-line{
         background-color: black;
         display: none;
         height: 2px;
@@ -141,7 +138,6 @@ body{
       }
     }
   }
-
 }
 
 
@@ -153,7 +149,7 @@ body{
   left: 0;
   background-color: rgba(0, 0, 0, 0.1);
 
-  // display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   display: none;
