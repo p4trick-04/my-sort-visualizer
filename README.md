@@ -1,5 +1,5 @@
-### `npm install`
+### npm install
 Install dependencies.
 
-### `npm run dev`
+### npm run dev
 Runs the app in the development mode.
