@@ -1,0 +1,127 @@
+@use "reset";
+@include reset.reset-default-values();
+
+
+:root{
+  font-size: 18px;
+}
+
+*,*::after,*::before {
+  box-sizing: border-box;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #EEF1FF;
+}
+
+.container{
+  position: relative;
+}
+
+
+
+.no-margin{margin: 0;}
+.opacity-1{opacity: 1 !important;}
+.d-flex{display: flex !important;}
+.visible{visibility: visible !important;}
+
+
+
+header{
+  box-shadow: 0px 0px 6px black;
+  // background-color: #E7F9FF;
+  background-color: #D2DAFF;
+  padding: .5rem 1rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  .left-wrap{
+    display: flex;
+    column-gap: 2.5rem;
+    align-items: center;
+    .start-btn{
+      border: 1px gray solid;
+      background-color: #B1B2FF;
+      border-radius: 50%;
+      width: 5rem;
+      height: 5rem;
+      font-size: 1.75rem;
+      &:hover{
+        transition-duration: 500ms;
+        background-color: black;
+        color: whitesmoke;
+        box-shadow: 0px 0px 3px 5px white;
+      }
+    }
+
+    .shuffle-array{
+      border-radius: 25%;
+      height: fit-content;
+      align-self: center;
+      background-color: transparent;
+      &:hover{
+        transition-duration: 500ms;
+        background-color: black;
+        color: whitesmoke;
+        box-shadow: 0px 0px 3px 5px white;
+      }
+    }
+
+    .main-setting{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .more-setting{
+      width: max-content;
+      background-color: transparent;
+      border: 0;
+
+      &:hover{
+        animation-name: spin;
+        animation-duration: 5000ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+    }
+
+    .label-wrap{
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+
+    .start-btn,
+    .shuffle-array,
+    .more-setting,
+    input[type="range"],
+    .size-input:hover{
+      cursor: pointer;
+    }
+
+    .size-input{
+      background-color: whitesmoke;
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding-left: 3px;
+      padding-right: 3px;
+      // if the size-input clicked
+      &:focus{
+        background-color: white;
+        cursor: text;
+        border: 0;
+      }
+      &:focus-visible{
+        border: 0;
+      }
+    }
+  }
+  
+
+}
+
+#a-timer{
+  padding:1rem;
+}

@@ -1,6 +1,15 @@
+interface AlgoProperties{
+  isSorted: boolean,
+  algo: string,
+}
+
 export default function algoCategoryLine(
   algoMenu: HTMLUListElement,
-  algoMenuLine: HTMLLIElement
+  algoMenuLine: HTMLLIElement,
+  moreAlgoContainer: HTMLDivElement,
+  moreAlgoBtn: HTMLButtonElement,
+  moreAlgoPick: NodeList,
+  algoProperties: AlgoProperties,
 ){
   let leftDef: number=0, widthDef: number=0;
   let calcPosition: number, calcWidth: number;
@@ -18,8 +27,8 @@ export default function algoCategoryLine(
     // if the li element is hovered
     algoMenu.children[i].addEventListener("mouseover", (e: Event) => {
       let menu = e.target as HTMLInputElement;
-      console.log(menu);
-      console.log(menu.offsetLeft);
+      // console.log(menu);
+      // console.log(menu.offsetLeft);
 
       // show the line
       algoMenuLine.style.display = "block";
@@ -35,7 +44,7 @@ export default function algoCategoryLine(
     
     // if the li element is clicked
     algoMenu.children[i].addEventListener("click", () => {
-      console.log("clicked");
+      console.log("selected algo: ",algoMenu.children[i]);
       
       // make the menu line fixed place according where it gets clicked
       algoMenuLine.style.width = calcWidth + "px";
@@ -44,6 +53,8 @@ export default function algoCategoryLine(
       widthDef = calcWidth;
       leftDef = calcPosition;
       isFirstTime=false;
+
+      algoProperties.algo = algoMenu.children[i].textContent
     });
   }
   
@@ -54,5 +65,23 @@ export default function algoCategoryLine(
     // but we will maintain where is the last hovered element
     algoMenuLine.style.width = widthDef + "px";
     algoMenuLine.style.left = leftDef + "px";
+  });
+
+
+  // more algo section
+  moreAlgoBtn.addEventListener("click", (e: Event) => {
+    console.log('show more algo')
+    moreAlgoContainer.classList.toggle("visible");
+    moreAlgoContainer.classList.toggle("opacity-1");
+  });
+
+  moreAlgoPick.forEach((algo) => {
+    for(let i=0; i<algo.childElementCount; i++){
+      // console.log(algo.children[i]);
+      algo.children[i].addEventListener("click", () => {
+        console.log("selected algo: ",algo.children[i])
+        algoProperties.algo = algo.children[i].textContent
+      })
+    }
   });
 }

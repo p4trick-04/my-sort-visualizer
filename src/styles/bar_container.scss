@@ -1,0 +1,23 @@
+.bar-container-1{
+  margin-bottom: 2rem;
+  // the plan is there will be a "pseudo code" at the left bar
+  // so setting the bar-container padding to 20starem is the right choice
+  padding: 0 2rem;
+  display: flex;
+  column-gap: 1px;
+  justify-content: center;
+  // position: relative;
+
+  // uncomment this if I want the bar stick at the bottom together
+  // align-items: flex-end;
+  & > div{
+    // border-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    // border-top-left-radius: ;
+    // border-top-right-radius: ;
+    background-color: #F65050;
+    width: 25%;
+    // transition: 0.2s all ease;
+  }
+}

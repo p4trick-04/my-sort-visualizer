@@ -1,6 +1,6 @@
 export default function Settings(){
   const div = document.createElement("div") as HTMLElement;
-  return div.innerHTML = `
+  div.innerHTML = `
     <div class="setting-display">
       <div class="setting-contents">
         <button class="exit-btn">❌</button>
@@ -35,7 +35,6 @@ export default function Settings(){
       </div>
     </div>
   `;
-
-
-
+  
+  return div.innerHTML;
 }

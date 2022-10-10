@@ -1,36 +1,101 @@
-import './styles/main.scss'
-import {setRandHeight,appendChildRandom} from "./utils"
-import Header from "./componenets/Header"
-import Settings from "./componenets/Settings"
-import Bar1 from "./componenets/Bar1"
-
-import dom_elements from "./dom_elements"
-import resizeArray from "./resizeArray"
-import shuffleArray from "./shuffleArray"
-import algoCategoryLine from "./algoCategoryLine"
-import settings from "./settings"
-
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-    <!-- start container -->
-    <div class="container">
-      <!-- start header -->
-      ${Header()}
-      <!-- end header -->
-      ${Settings()}
-      ${Bar1()}
-    </div>
-`
-const dom = dom_elements();
+import resizeArray from "./utils/resizeArray";
+import shuffleArray from "./utils/shuffleArray";
+import algoCategoryLine from "./utils/algoCategoryLine";
+import moreSetting from "./utils/moreSetting";
+import setSpeed from './utils/setSpeed';
+import { sortedColor } from './utils/colors';
+import * as sort from './utils/sort-algos/comparasionBasedSort';
+import * as dom from "./dom/dom_elements";
+import StopWatch from "./utils/StopWatch";
+import {
+  setRandHeight,
+  appendChildRandom,
+  adjustInputText,
+  delay,
+} from "./utils/utilities";
 
 
-// initial array. set all of the array with random height
-for(let i=0; i<Number(dom.sizeRange.value); i++){
-  const div = document.createElement("div") as HTMLDivElement;
-  setRandHeight(div);
-  appendChildRandom(dom.barContainer1,div,i);
+export default function(){
+  // initial array. set all of the array with random height
+  for(let i=0; i<Number(dom.sizeRange.value); i++){
+    const div = document.createElement("div") as HTMLDivElement;
+    setRandHeight(div);
+    appendChildRandom(dom.barContainer1,div,i);
+  }
+  
+  dom.sizeInput.value = dom.sizeRange.value;
+  adjustInputText(dom.sizeInput,12);
+  
+  const algoProperties: AlgoProperties = {
+    isSorted: false,
+    algo:"",
+  }
+  
+  resizeArray(dom.barContainer1, dom.sizeRange, dom.sizeInput);
+  setSpeed(dom.speedInput,dom.speedVerbose);
+  dom.shuffleArrayBtn.addEventListener("click",() => shuffleArray(dom.barContainer1));
+  algoCategoryLine(dom.algoMenu, dom.algoMenuLine, dom.moreAlgoContainer, dom.moreAlgoBtn, dom.moreAlgoPick, algoProperties);
+  moreSetting(dom.moreSettingBtn, dom.moreSettingDisplay, dom.exitBtn);
+  
+  
+  // timer
+  var a = document.getElementById("a-timer");
+  const aTimer = new StopWatch(a);
+  
+  dom.startBtn.addEventListener("click", startAlgo);
+  
+  async function startAlgo(){
+    if(!algoProperties.algo) return;
+    if(algoProperties.isSorted) {
+      console.log("already sorted!")
+      shuffleArray(dom.barContainer1)
+      aTimer.reset();
+      algoProperties.isSorted = false;
+    }
+
+    aTimer.start();
+    dom.startBtn.disabled = true;
+    console.log(algoProperties.algo);
+    switch(algoProperties.algo){
+      case "Bubble":
+        await sort.bubbleSort();
+        break;
+      case "Insertion":
+        await sort.insertionSort();
+        break;
+      case "Selection":
+        await sort.selectionSort();
+        break;
+      case "Merge":
+        await sort.mergeSort();
+        break;
+      case "Quick (Lomuto Partition)":
+        await sort.quickSortLomuto();
+        break;
+      case "Heap sort":
+        await sort.heapSort();
+        break;
+      default:
+        return;
+      
+    }
+  
+    // last animation
+    for(let i=0; i<dom.barContainer1.childElementCount; i++){
+      dom.barContainer1.children[i].style.backgroundColor = "yellow";
+      await delay(Number(dom.speedInput.value))
+      dom.barContainer1.children[i].style.backgroundColor = sortedColor;
+    }
+  
+  
+    algoProperties.isSorted = true;
+    dom.startBtn.disabled = false;
+    aTimer.stop();
+  }
+  
 }
 
-resizeArray(dom.barContainer1, dom.sizeRange, dom.sizeInput)
-shuffleArray(dom.barContainer1,dom.newArray)
-algoCategoryLine(dom.algoMenu, dom.algoMenuLine)
-settings(dom.moreSetting, dom.settingDisplay, dom.exitBtn)
+interface AlgoProperties{
+  isSorted: boolean,
+  algo: string,
+}
