@@ -3,7 +3,7 @@ interface AlgoProperties{
   algo: string,
 }
 
-export default function algoCategoryLine(
+export default function algoCategory(
   algoMenu: HTMLUListElement,
   algoMenuLine: HTMLLIElement,
   moreAlgoContainer: HTMLDivElement,
@@ -11,6 +11,9 @@ export default function algoCategoryLine(
   moreAlgoPick: NodeList,
   algoProperties: AlgoProperties,
 ){
+  // temp var for storing previous selected algo. This is only for more algo setting not top navbar
+  let prev: HTMLLIElement | null = null;
+
   let leftDef: number=0, widthDef: number=0;
   let calcPosition: number, calcWidth: number;
   
@@ -45,7 +48,8 @@ export default function algoCategoryLine(
     // if the li element is clicked
     algoMenu.children[i].addEventListener("click", () => {
       console.log("selected algo: ",algoMenu.children[i]);
-      
+      prev!.style.boxShadow = "0 0 0 #000";
+
       // make the menu line fixed place according where it gets clicked
       algoMenuLine.style.width = calcWidth + "px";
       algoMenuLine.style.left = calcPosition + "px";
@@ -75,11 +79,12 @@ export default function algoCategoryLine(
     moreAlgoContainer.classList.toggle("opacity-1");
   });
 
-  let prev: HTMLLIElement | null = null;
   moreAlgoPick.forEach((algo) => {
     for(let i=0; i<algo.childElementCount; i++){
       // console.log(algo.children[i]);
       algo.children[i].addEventListener("click", function(){
+        algoMenuLine.style.width = 0 + "px";
+        algoMenuLine.style.left = 0 + "px";
         if(!prev){
           prev = this;
           prev!.style.boxShadow = "0 2px 0 #000";

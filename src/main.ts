@@ -1,6 +1,6 @@
 import resizeArray from "./utils/resizeArray";
 import shuffleArray from "./utils/shuffleArray";
-import algoCategoryLine from "./utils/algoCategoryLine";
+import algoCategory from "./utils/algoCategory";
 import moreSetting from "./utils/moreSetting";
 import setSpeed from './utils/setSpeed';
 import { sortedColor } from './utils/colors';
@@ -34,7 +34,7 @@ export default function(){
   resizeArray(dom.barContainer1, dom.sizeRange, dom.sizeInput);
   setSpeed(dom.speedInput,dom.speedVerbose);
   dom.shuffleArrayBtn.addEventListener("click",() => shuffleArray(dom.barContainer1));
-  algoCategoryLine(dom.algoMenu, dom.algoMenuLine, dom.moreAlgoContainer, dom.moreAlgoBtn, dom.moreAlgoPick, algoProperties);
+  algoCategory(dom.algoMenu, dom.algoMenuLine, dom.moreAlgoContainer, dom.moreAlgoBtn, dom.moreAlgoPick, algoProperties);
   moreSetting(dom.moreSettingBtn, dom.moreSettingDisplay, dom.exitBtn,dom.checkBox_List,dom.barContainer1);
   
   
@@ -93,7 +93,7 @@ export default function(){
     // last animation
     for(let i=0; i<dom.barContainer1.childElementCount; i++){
       dom.barContainer1.children[i].style.backgroundColor = "yellow";
-      await delay(5)
+      await delay(0.1)
       dom.barContainer1.children[i].style.backgroundColor = sortedColor;
     }
   
