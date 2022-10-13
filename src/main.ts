@@ -45,6 +45,7 @@ export default function(){
   dom.startBtn.addEventListener("click", startAlgo);
   
   async function startAlgo(){
+    console.log("start shit")
     if(!algoProperties.algo) return;
     if(algoProperties.isSorted) {
       console.log("already sorted!")
@@ -81,6 +82,10 @@ export default function(){
       case "Shell sort":
         await sort.shellSort();
         break;
+      case "Coktail shaker sort":
+        await sort.cocktailSort();
+        break;
+        
       default:
         return;
       

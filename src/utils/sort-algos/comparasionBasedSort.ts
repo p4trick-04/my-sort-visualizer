@@ -22,9 +22,7 @@ async function bubbleSort() {
       if(
         getHeightNode(element_j)>getHeightNode(element_j_plus_1)
       ){
-        let h: string = element_j_plus_1.style.height;
-        element_j_plus_1.style.height = element_j.style.height
-        element_j.style.height = h;
+        swapForArr(arr,j,j+1);
         isSwap=true;
       }
 
@@ -80,7 +78,6 @@ async function selectionSort() {
     let minIdx = i;
     // selected element
     arr[i].style.backgroundColor = "yellow";
-    await delay(howFast);
 
     for(let j=i+1; j<arr.length; j++){
       
@@ -384,6 +381,51 @@ async function shellSort(){
 
 }
 
+
+
+
+
+async function cocktailSort(){
+  const howFast: number = Number(speedInput.value);
+
+  let isSwap: boolean = true;
+  let end=arr.length-1;
+  let start=0;
+  while(isSwap){
+    isSwap = false;
+    for(let j=start; j<end; j++){
+      arr[j].style.backgroundColor = "yellow";
+      arr[j+1].style.backgroundColor = "yellow";
+      await delay(howFast);
+
+      if(getHeightNode(arr[j])>getHeightNode(arr[j+1])){
+        swapForArr(arr,j,j+1);
+        isSwap = true;
+      }
+      arr[j].style.backgroundColor = unsortedColor;
+      arr[j+1].style.backgroundColor = unsortedColor;
+    }
+    arr[end].style.backgroundColor = sortedColor;
+    if(!isSwap) break;
+    isSwap = false;
+
+    end--;
+    for(let j=end-1; j>=start; j--){
+      arr[j].style.backgroundColor = "yellow";
+      arr[j+1].style.backgroundColor = "yellow";
+      await delay(howFast);
+
+      if(getHeightNode(arr[j])>getHeightNode(arr[j+1])){
+        swapForArr(arr,j,j+1);
+        isSwap = true;
+      }
+      arr[j].style.backgroundColor = unsortedColor;
+      arr[j+1].style.backgroundColor = unsortedColor;
+    }
+    start++;
+  }
+}
+
 export {
   bubbleSort,
   insertionSort,
@@ -393,5 +435,6 @@ export {
   quickSortHoare,
   heapSort,
   mergeSortInplace,
-  shellSort
+  shellSort,
+  cocktailSort
 };

@@ -48,7 +48,7 @@ export default function algoCategory(
     // if the li element is clicked
     algoMenu.children[i].addEventListener("click", () => {
       console.log("selected algo: ",algoMenu.children[i]);
-      prev!.style.boxShadow = "0 0 0 #000";
+      if(prev!=null) prev!.style.boxShadow = "0 0 0 #000";
 
       // make the menu line fixed place according where it gets clicked
       algoMenuLine.style.width = calcWidth + "px";

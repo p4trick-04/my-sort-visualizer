@@ -27,7 +27,7 @@ export default function MoreAlgo(){
       </ul>
     </div>
     <div>
-      <h3>Non-comparasion sorts</h3>
+      <h3>Non-comparasion sorts(Integer)</h3>
       <ul class="more-algo-pick">
         <li>Pigeonhole sort</li>
         <li>Bucket sort(uniform keys)</li>
