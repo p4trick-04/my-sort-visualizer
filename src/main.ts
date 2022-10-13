@@ -93,7 +93,7 @@ export default function(){
     // last animation
     for(let i=0; i<dom.barContainer1.childElementCount; i++){
       dom.barContainer1.children[i].style.backgroundColor = "yellow";
-      await delay(Number(dom.speedInput.value))
+      await delay(5)
       dom.barContainer1.children[i].style.backgroundColor = sortedColor;
     }
   

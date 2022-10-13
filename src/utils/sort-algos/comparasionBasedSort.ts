@@ -197,13 +197,11 @@ async function divideMerge(
   if(leftIdx>=rightIdx) return;
   let mid: number = leftIdx+Math.floor((rightIdx-leftIdx)/2);
 
-
   await divideMerge(arr,leftIdx,mid,howFast);
   await divideMerge(arr,mid+1,rightIdx,howFast);
 
   console.log("conquer and combine part");
   await merge(arr,leftIdx,mid,rightIdx,howFast);
-
 }
 
 async function mergeSort() {
@@ -302,8 +300,60 @@ async function heapSort(){
 
 
 
-async function mergeSortInplace(){
 
+async function mergeInplace(
+  arr: HTMLCollection,
+  mid: number,
+  howFast: number,
+){
+	let rightStart = mid + 1;
+
+	// If the arr already in the right place(sorted)
+	if(getHeightNode(arr[mid]) <= getHeightNode(arr[rightStart])){
+		return;
+	}
+
+  let n = arr.length;
+  for(let gap=Math.floor(n/2); gap>=1; gap=Math.floor(gap/2)){
+    for(let right=gap; right<n; right++){
+      for(let left=right-gap; left>=0; left-=gap){
+        arr[left].style.backgroundColor = "yellow";
+        arr[left+gap].style.backgroundColor = "yellow";
+        await delay(howFast);
+        if(getHeightNode(arr[left])>getHeightNode(arr[left+gap])){
+          arr[left].style.backgroundColor = unsortedColor;
+          arr[left+gap].style.backgroundColor = unsortedColor;
+          swapForArr(arr,left,left+gap);
+        }else{
+          arr[left].style.backgroundColor = unsortedColor;
+          arr[left+gap].style.backgroundColor = unsortedColor;
+          break;
+        }
+      }
+    }
+  }
+}
+
+// In this case let's treat HTMLCollection and Array share a common properties
+async function divideMergeInplace(
+  arr: HTMLCollection,
+  leftIdx: number,
+  rightIdx: number,
+  howFast: number,
+) {
+  if(leftIdx>=rightIdx) return;
+  let mid: number = leftIdx+Math.floor((rightIdx-leftIdx)/2);
+
+  await divideMergeInplace(arr,leftIdx,mid,howFast);
+  await divideMergeInplace(arr,mid+1,rightIdx,howFast);
+
+  console.log("conquer and combine part");
+  await mergeInplace(arr,mid,howFast);
+}
+
+async function mergeSortInplace(){
+  const howFast: number = Number(speedInput.value);
+  await divideMergeInplace(arr,0,arr.length-1,howFast);
 }
 
 
