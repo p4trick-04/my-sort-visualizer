@@ -55,17 +55,15 @@
       margin-bottom: 2rem;
     }
     div > ul{
+      li{
+        text-align: center;
+      }
       li:hover{
         cursor: pointer;
         box-shadow: 0 2px 0 #000;
         transition: box-shadow 500ms linear;
       }
-      li:focus-within{
-        box-shadow: 0 2px 0 #000;
-      }
-      li{
-        text-align: center;
-      }
+
       padding-left: 1rem;
       display: grid;
       grid-template-columns: repeat(4,auto);

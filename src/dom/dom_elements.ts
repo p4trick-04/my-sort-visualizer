@@ -31,6 +31,9 @@
 export const sizeRange = document.querySelector<HTMLInputElement>(".size-range")!
 export const sizeInput = document.querySelector<HTMLInputElement>(".size-input")!
 export const speedInput = document.querySelector<HTMLInputElement>("#set-speed")!
+export const descending = document.querySelector<HTMLInputElement>(".descending")!
+export const ascending = document.querySelector<HTMLInputElement>(".ascending")!
+
 
 export const algoMenu = document.querySelector<HTMLUListElement>(".algo-menu")!
 

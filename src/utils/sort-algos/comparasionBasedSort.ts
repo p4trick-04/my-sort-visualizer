@@ -51,7 +51,7 @@ async function insertionSort() {
     while(
       j>=0 && 
       currVal<getHeightNode(arr[j] as HTMLElement)
-      ){
+    ){
       // element to be compared  
       arr[j+1].style.backgroundColor = "yellow";
       arr[j].style.backgroundColor = "yellow";
@@ -59,7 +59,6 @@ async function insertionSort() {
 
       swapForArr(arr,j,j+1);
 
-      await delay(howFast);
       key = j;
       j--;
       for(let k=i; k>=0; k--){
@@ -301,6 +300,40 @@ async function heapSort(){
 
 
 
+
+
+async function mergeSortInplace(){
+
+}
+
+
+
+
+
+async function shellSort(){
+  const howFast: number = Number(speedInput.value);
+  let n = arr.length;
+  for(let gap=Math.floor(n/2); gap>=1; gap=Math.floor(gap/2)){
+    for(let right=gap; right<n; right++){
+      for(let left=right-gap; left>=0; left-=gap){
+        arr[left].style.backgroundColor = "yellow";
+        arr[left+gap].style.backgroundColor = "yellow";
+        await delay(howFast);
+        if(getHeightNode(arr[left])>getHeightNode(arr[left+gap])){
+          arr[left].style.backgroundColor = unsortedColor;
+          arr[left+gap].style.backgroundColor = unsortedColor;
+          swapForArr(arr,left,left+gap);
+        }else{
+          arr[left].style.backgroundColor = unsortedColor;
+          arr[left+gap].style.backgroundColor = unsortedColor;
+          break;
+        }
+      }
+    }
+  }
+
+}
+
 export {
   bubbleSort,
   insertionSort,
@@ -308,5 +341,7 @@ export {
   mergeSort,
   quickSortLomuto,
   quickSortHoare,
-  heapSort
+  heapSort,
+  mergeSortInplace,
+  shellSort
 };

@@ -160,7 +160,7 @@ function printHTMLCollection(arr: HTMLCollection){
 
 
 
-const getHeightNode = (ele: HTMLElement) => removeLastString(ele.style.height);
+const getHeightNode = (ele: HTMLElement | Element | Node) => removeLastString(ele.style.height);
 
 export {
   getRandNum,

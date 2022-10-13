@@ -35,7 +35,7 @@ export default function(){
   setSpeed(dom.speedInput,dom.speedVerbose);
   dom.shuffleArrayBtn.addEventListener("click",() => shuffleArray(dom.barContainer1));
   algoCategoryLine(dom.algoMenu, dom.algoMenuLine, dom.moreAlgoContainer, dom.moreAlgoBtn, dom.moreAlgoPick, algoProperties);
-  moreSetting(dom.moreSettingBtn, dom.moreSettingDisplay, dom.exitBtn);
+  moreSetting(dom.moreSettingBtn, dom.moreSettingDisplay, dom.exitBtn,dom.checkBox_List,dom.barContainer1);
   
   
   // timer
@@ -75,10 +75,20 @@ export default function(){
       case "Heap sort":
         await sort.heapSort();
         break;
+      case "In-place merge sort":
+        await sort.mergeSortInplace();
+        break;
+      case "Shell sort":
+        await sort.shellSort();
+        break;
       default:
         return;
       
     }
+    
+    algoProperties.isSorted = true;
+    dom.startBtn.disabled = false;
+    aTimer.stop();
   
     // last animation
     for(let i=0; i<dom.barContainer1.childElementCount; i++){
@@ -88,9 +98,6 @@ export default function(){
     }
   
   
-    algoProperties.isSorted = true;
-    dom.startBtn.disabled = false;
-    aTimer.stop();
   }
   
 }

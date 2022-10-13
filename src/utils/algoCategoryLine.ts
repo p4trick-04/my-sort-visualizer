@@ -69,18 +69,27 @@ export default function algoCategoryLine(
 
 
   // more algo section
-  moreAlgoBtn.addEventListener("click", (e: Event) => {
+  moreAlgoBtn.addEventListener("click", () => {
     console.log('show more algo')
     moreAlgoContainer.classList.toggle("visible");
     moreAlgoContainer.classList.toggle("opacity-1");
   });
 
+  let prev: HTMLLIElement | null = null;
   moreAlgoPick.forEach((algo) => {
     for(let i=0; i<algo.childElementCount; i++){
       // console.log(algo.children[i]);
-      algo.children[i].addEventListener("click", () => {
-        console.log("selected algo: ",algo.children[i])
-        algoProperties.algo = algo.children[i].textContent
+      algo.children[i].addEventListener("click", function(){
+        if(!prev){
+          prev = this;
+          prev!.style.boxShadow = "0 2px 0 #000";
+        }else{
+          prev.style.boxShadow = "0 0 0 #000";
+          prev = this;
+          prev!.style.boxShadow = "0 2px 0 #000";
+        }
+        console.log("selected algo: ",this)
+        algoProperties.algo = this.textContent
       })
     }
   });

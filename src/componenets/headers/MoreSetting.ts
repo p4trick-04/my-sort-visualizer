@@ -15,15 +15,11 @@ export default function MoreSetting(){
         <button class="exit-btn">❌</button>
         <h1 class="title">Settings</h1>
         <div>
-          <input type="checkbox" class="timer">
-          <p>timer</p>
-        </div>
-        <div>
-          <input type="checkbox" class="asc" checked>
+          <input type="checkbox" class="ascending" checked>
           <p>ascending sort</p>
         </div>
         <div>
-          <input type="checkbox" class="desc">
+          <input type="checkbox" class="descending">
           <p>descending sort</p>
         </div>
         <div>
@@ -35,7 +31,7 @@ export default function MoreSetting(){
           <p>pseudocode</p>
         </div>
         <div>
-          <input type="checkbox" class="compare">
+          <input type="checkbox" class="compare-algo">
           <p>compare algorithm</p>
         </div>
         <div>
