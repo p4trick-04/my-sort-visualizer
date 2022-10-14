@@ -85,6 +85,9 @@ export default function(){
       case "Coktail shaker sort":
         await sort.cocktailSort();
         break;
+      case "Comb sort":
+        await sort.combSort();
+        break;
         
       default:
         return;

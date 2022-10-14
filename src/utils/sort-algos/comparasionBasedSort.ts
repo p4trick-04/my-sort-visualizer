@@ -426,6 +426,40 @@ async function cocktailSort(){
   }
 }
 
+
+
+function getNextGap(gap: number){
+  // Shrink gap by Shrink factor
+  gap = Math.floor(gap*10/13);
+  if (gap < 1) return 1;
+  return gap;
+}
+
+async function combSort(){
+  const howFast: number = Number(speedInput.value);
+
+  let n = arr.length;
+  let gap = n;
+  let swapped = true;
+
+  while (gap != 1 || swapped == true){
+    gap = getNextGap(gap);
+    swapped = false;
+    for (let i=0; i<n-gap; i++){
+      arr[i].style.backgroundColor = "yellow";
+      arr[i+gap].style.backgroundColor = "yellow";
+      await delay(howFast);
+      if(getHeightNode(arr[i]) > getHeightNode(arr[i+gap])){
+        swapForArr(arr,i,i+gap);
+        swapped = true;
+      }
+      arr[i].style.backgroundColor = unsortedColor;
+      arr[i+gap].style.backgroundColor = unsortedColor;
+    }
+    console.log("\n");
+  }
+}
+
 export {
   bubbleSort,
   insertionSort,
@@ -436,5 +470,6 @@ export {
   heapSort,
   mergeSortInplace,
   shellSort,
-  cocktailSort
+  cocktailSort,
+  combSort
 };
