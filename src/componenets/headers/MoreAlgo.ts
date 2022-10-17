@@ -11,7 +11,6 @@ export default function MoreAlgo(){
         <li>Heap sort</li>
         <li>Block sort</li>
         <li>Tim sort</li>
-        <li>Cube sort</li>
         <li>Shell sort</li>
         <li>Exchange sort</li>
         <li>Tree sort</li>

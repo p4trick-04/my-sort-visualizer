@@ -460,6 +460,121 @@ async function combSort(){
   }
 }
 
+
+
+
+
+
+
+async function cycleSort(){
+  const howFast: number = Number(speedInput.value);
+
+  let n: number = arr.length;
+  // count number of memory writes
+  let writes = 0;
+
+  // traverse array elements and put it to on
+  // the right place
+  for (let cycle_start=0; cycle_start<n-1; cycle_start++){
+    // initialize item as starting point
+    let item: number = getHeightNode(arr[cycle_start]);
+    // Find position where we put the item. We basically count all smaller elements on right side of item.
+
+    let pos: number = cycle_start;
+    
+    arr[cycle_start].style.backgroundColor = "yellow";
+    for (let i=cycle_start+1; i<n; i++){
+      if(getComputedStyle(arr[i]).backgroundColor !== sortedColor){
+        arr[i].style.backgroundColor = "yellow";
+        await delay(howFast)
+        arr[i].style.backgroundColor = unsortedColor;
+      }
+
+      if (getHeightNode(arr[i]) < item) pos++;
+    }
+
+    // ignore all duplicate elements
+    while (item == getHeightNode(arr[pos])){
+      arr[pos].style.backgroundColor = "yellow";
+      await delay(howFast)
+      pos++;
+      arr[pos].style.backgroundColor = unsortedColor;
+    }
+
+    // If item is already in correct position
+    if (pos == cycle_start){
+      arr[cycle_start].style.backgroundColor = sortedColor;
+      continue;
+    }
+
+    // put the item to it's right position
+    if (pos != cycle_start){
+      arr[pos].style.backgroundColor = "yellow";
+      await delay(howFast);
+
+      let temp: number = item;
+      item = getHeightNode(arr[pos]);
+      arr[pos].style.height = temp+"px";
+      arr[cycle_start].style.height = item+"px";
+      arr[pos].style.backgroundColor = sortedColor;
+      // arr[pos].style.backgroundColor = unsortedColor;
+
+
+      writes++;
+    }
+
+    // Rotate rest of the cycle
+    while (pos != cycle_start){
+      pos = cycle_start;
+      
+      // Find position where we put the element
+      for (let i=cycle_start+1; i<n; i++){
+        if(getComputedStyle(arr[i]).backgroundColor !== sortedColor){
+          arr[i].style.backgroundColor = "yellow";
+          await delay(howFast)
+          arr[i].style.backgroundColor = unsortedColor;
+        }
+        if (getHeightNode(arr[i]) < item) pos++;
+      }
+      // If item is already in correct position
+      if (pos == cycle_start) {
+        arr[cycle_start].style.backgroundColor = sortedColor;
+        continue;
+      }
+      
+      // ignore all duplicate elements
+      while (item == getHeightNode(arr[pos])) {
+        arr[pos].style.backgroundColor = "yellow";
+        await delay(howFast)
+        pos++;
+        arr[pos].style.backgroundColor = unsortedColor;
+      }
+
+      // put the item to it's right position
+      if (item != getHeightNode(arr[pos])) {
+        arr[pos].style.backgroundColor = "yellow";
+        await delay(howFast);
+        
+        let temp = item;
+        item = getHeightNode(arr[pos]);
+        arr[pos].style.height = temp+"px";
+        arr[cycle_start].style.height = item+"px"
+        arr[pos].style.backgroundColor = sortedColor;
+        // arr[pos].style.backgroundColor = sortedColor;
+
+
+        writes++;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
 export {
   bubbleSort,
   insertionSort,
@@ -471,5 +586,6 @@ export {
   mergeSortInplace,
   shellSort,
   cocktailSort,
-  combSort
+  combSort,
+  cycleSort
 };

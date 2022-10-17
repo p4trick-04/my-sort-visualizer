@@ -88,6 +88,10 @@ export default function(){
       case "Comb sort":
         await sort.combSort();
         break;
+      case "Cycle sort":
+        await sort.cycleSort();
+        break;
+      
         
       default:
         return;
@@ -100,7 +104,7 @@ export default function(){
   
     // last animation
     for(let i=0; i<dom.barContainer1.childElementCount; i++){
-      dom.barContainer1.children[i].style.backgroundColor = "yellow";
+      dom.barContainer1.children[i].style.backgroundColor = "lightblue";
       await delay(0.1)
       dom.barContainer1.children[i].style.backgroundColor = sortedColor;
     }
