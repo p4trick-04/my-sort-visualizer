@@ -42,6 +42,7 @@ export const algoMenuLine = document.querySelector<HTMLLIElement>(".algo-menu-li
 export const barContainer1 = document.querySelector<HTMLDivElement>(".bar-container-1")!
 export const moreSettingDisplay = document.querySelector<HTMLDivElement>(".more-setting-display")!
 export const moreAlgoContainer = document.querySelector<HTMLDivElement>(".more-algo-container")!
+export const arrContainer = document.querySelector<HTMLDivElement>(".arr-container")!
 
 export const moreSettingBtn = document.querySelector<HTMLButtonElement>(".more-setting")!
 export const exitBtn = document.querySelector<HTMLButtonElement>(".exit-btn")!

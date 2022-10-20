@@ -11,7 +11,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div id="a-timer">
     Time
   </div>
-  ${Bar1()}
+  <div class="arr-container">
+    ${Bar1()}
+  </div>
 `;
 
 // core logic(DOM, algo sorting, etc)

@@ -33,7 +33,10 @@ export default function(){
   
   resizeArray(dom.barContainer1, dom.sizeRange, dom.sizeInput);
   setSpeed(dom.speedInput,dom.speedVerbose);
-  dom.shuffleArrayBtn.addEventListener("click",() => shuffleArray(dom.barContainer1));
+  dom.shuffleArrayBtn.addEventListener("click",() => {
+    shuffleArray(dom.barContainer1)
+    algoProperties.isSorted = false;
+  });
   algoCategory(dom.algoMenu, dom.algoMenuLine, dom.moreAlgoContainer, dom.moreAlgoBtn, dom.moreAlgoPick, algoProperties);
   moreSetting(dom.moreSettingBtn, dom.moreSettingDisplay, dom.exitBtn,dom.checkBox_List,dom.barContainer1);
   
@@ -91,7 +94,29 @@ export default function(){
       case "Cycle sort":
         await sort.cycleSort();
         break;
-      
+      case "Tim sort":
+        await sort.timSort();
+        break;
+      case "Strand sort":
+        // const newArr: Array<HTMLElement> = [];
+        const output: HTMLDivElement = document.createElement("div")
+        output.classList.add("arr-style");
+
+        dom.arrContainer.appendChild(output)
+        await sort.strandSort(output);
+        dom.barContainer1.remove();
+
+        output.classList.add("bar-container-1");
+
+        // last animation
+        for(let i=0; i<output.childElementCount; i++){
+          output.children[i].style.backgroundColor = "lightblue";
+          await delay(5)
+          output.children[i].style.backgroundColor = sortedColor;
+        }
+
+        break;
+
         
       default:
         return;
@@ -105,7 +130,7 @@ export default function(){
     // last animation
     for(let i=0; i<dom.barContainer1.childElementCount; i++){
       dom.barContainer1.children[i].style.backgroundColor = "lightblue";
-      await delay(0.1)
+      await delay(5)
       dom.barContainer1.children[i].style.backgroundColor = sortedColor;
     }
   

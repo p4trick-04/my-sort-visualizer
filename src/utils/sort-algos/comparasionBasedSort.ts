@@ -38,32 +38,55 @@ async function bubbleSort() {
 
 
 
-async function insertionSort() {
+// these arguments are intended for timsort
+async function insertionSort(left=0,right=0){
   const howFast: number = Number(speedInput.value);
 
-  for(let i=1; i<arr.length; i++){
-    const element_i = arr[i] as HTMLElement;
-    let j: number = i-1;
-    let key: number = 0;
-    let currVal: number = getHeightNode(element_i);
-    while(
-      j>=0 && 
-      currVal<getHeightNode(arr[j] as HTMLElement)
-    ){
-      // element to be compared  
-      arr[j+1].style.backgroundColor = "yellow";
-      arr[j].style.backgroundColor = "yellow";
-      await delay(howFast);
-
-      swapForArr(arr,j,j+1);
-
-      key = j;
-      j--;
-      for(let k=i; k>=0; k--){
+  // for tim sort
+  if(right>0||left>0){
+    console.log("nasi tim")
+    for(let i=1+left; i<right; i++){
+      const element_i = arr[i] as HTMLElement;
+      let j: number = i-1;
+      let currVal: number = getHeightNode(element_i);
+      while(
+        j>=0 && 
+        currVal<getHeightNode(arr[j] as HTMLElement)
+      ){
+        // element to be compared  
+        arr[j+1].style.backgroundColor = "yellow";
+        arr[j].style.backgroundColor = "yellow";
+        await delay(howFast);
+  
+        swapForArr(arr,j,j+1);
+        arr[j+1].style.backgroundColor = unsortedColor;
+        arr[j].style.backgroundColor = unsortedColor;
+        j--;
+      }
+      // arr[j+1].style.height = currVal+'px';
+    }
+  }else{
+    // normal insertion sort
+    for(let i=1; i<arr.length; i++){
+      const element_i = arr[i] as HTMLElement;
+      let j: number = i-1;
+      let currVal: number = getHeightNode(element_i);
+      while(
+        j>=0 && 
+        currVal<getHeightNode(arr[j] as HTMLElement)
+      ){
+        // element to be compared  
+        arr[j+1].style.backgroundColor = "yellow";
+        arr[j].style.backgroundColor = "yellow";
+        await delay(howFast);
+  
+        swapForArr(arr,j,j+1);
+  
+        j--;
         arr[k].style.backgroundColor = sortedColor;
       }
+      element_i.style.backgroundColor = sortedColor;
     }
-    element_i.style.backgroundColor = sortedColor;
   }
 }
 
@@ -572,6 +595,144 @@ async function cycleSort(){
 
 
 
+function mergeForTim(arr,left,mid,right){
+  console.log(chalk.blue(`merge sort executed: [${arr}]`));
+
+  let i=0, j=0, k=left;
+	let x=0;
+  let m = mid-left+1;
+  let n = right-mid;
+	const tempSortedArr = []
+  const L = new Array(m);
+  const R = new Array(n);
+  console.log(`l=${left} m=${mid} r=${right}`)
+  console.log(`m=${m} n=${n}`);
+  for(let i=0; i<m; i++) L[i] = arr[left+i];
+  for(let i=0; i<n; i++) R[i] = arr[mid+i+1];
+
+	while (i<m && j<n) {
+    console.log(`${L[i]} ${R[j]}`)
+		if(L[i]<=R[j]){
+			arr[k]=L[i]
+			tempSortedArr[x++]=L[i]
+			i++
+		}else{
+			arr[k]=R[j];
+			tempSortedArr[x++]=R[j]
+			j++;
+		}
+		k++;
+	}
+	
+	while (i < m){
+		console.log(`i<m ? ${i}<${m} ==> ${i<m}`);
+		arr[k] = L[i];
+		tempSortedArr[x++]=L[i]
+		i++;
+		k++;
+	}
+	while (j < n) {
+		console.log(`j<n ? ${j}<${n} ==> ${j<n}`);
+		arr[k] = R[j];
+		tempSortedArr[x++]=R[j]
+		j++;
+		k++;
+	}
+	console.log("left: ", L);
+	console.log("right: ", R);
+	console.log("temp sorted arr result: ",tempSortedArr);
+	console.log("merge result: ",arr,'\n');
+}
+
+async function timSort(){
+  const howFast: number = Number(speedInput.value);
+  
+  const n=arr.length
+  const RUN = 32;
+    // Sort individual subarrays of size RUN
+    for (let i=0; i<n; i+=RUN)
+      await insertionSort(i, Math.min(i+RUN,n))
+
+    // for (let partition=RUN; partition<n; partition*=2){
+    //   for (let left=0; left<n; left+=2*partition){
+    //     let mid = left + partition - 1;
+    //     let right = Math.min(left+2*partition-1,n-1);
+
+    //     if(mid<right) merge(arr, left, mid, right);
+    //   }
+    // }
+}
+
+
+async function strand(output:HTMLDivElement,howFast: number,firstTime: boolean){
+  if(arr.length<1) return;
+  let sublist: Array<HTMLElement> = []
+  sublist.push(arr[0] as HTMLElement);
+
+  arr[0].style.backgroundColor = "yellow";
+  
+  console.log(arr);
+
+  for(let i=0,j=0; i<arr.length; i++){
+    if(i===0) continue;
+
+    arr[i].style.backgroundColor = "yellow";
+    await delay(howFast);
+    if(getHeightNode(arr[i])>getHeightNode(sublist[j]!)){
+      arr[i].style.backgroundColor = "skyblue";
+      await delay(howFast);
+      sublist.push(arr[i] as HTMLElement);
+      j++
+    }else{
+      arr[i].style.backgroundColor = unsortedColor;
+    }
+  }
+  arr[0].style.backgroundColor = "skyblue";
+  await delay(howFast);
+  
+  if(firstTime){
+    console.log("ANJGGGGGGGGGGGGGGGGGGGR")
+    for(let ele of sublist){
+      ele.style.backgroundColor = "#323232"
+      console.log(getHeightNode(ele));
+      await delay(howFast);
+      output.append(ele)
+    }
+    firstTime=false;
+  }
+  else{
+    let subListEnd = sublist.length-1;
+    let outputStart = 0;
+    console.log(sublist);
+    while(sublist.length>0){
+
+      sublist[subListEnd].style.backgroundColor = "chocolate";
+      output.children[outputStart].style.backgroundColor = "chocolate";
+      await delay(howFast);
+
+      if(getHeightNode(sublist[subListEnd]) > getHeightNode(output.children[outputStart])){
+        output.children[outputStart++].style.backgroundColor = "#323232";
+        await delay(howFast);
+      }else{
+        sublist[subListEnd].style.backgroundColor = "#323232";
+        output.children[outputStart].style.backgroundColor = "#323232";
+        await delay(howFast);
+        output.insertBefore(sublist[subListEnd], output.children[outputStart]);
+        sublist.splice(subListEnd,1);
+
+        subListEnd--;
+        outputStart=0;
+      }
+    }
+  }
+  await strand(output,howFast,firstTime)
+}
+
+async function strandSort(output: HTMLDivElement){
+  const howFast: number = Number(speedInput.value);
+  let firstTime = true;
+  await strand(output,howFast,firstTime);
+}
 
 
 
@@ -587,5 +748,7 @@ export {
   shellSort,
   cocktailSort,
   combSort,
-  cycleSort
+  cycleSort,
+  timSort,
+  strandSort
 };
