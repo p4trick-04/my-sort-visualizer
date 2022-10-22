@@ -1,6 +1,6 @@
 import { delay, printHTMLCollection,getHeightNode,swapForArr } from "../utilities";
 import { unsortedColor,sortedColor } from "../colors";
-import { barContainer1,speedInput } from "../../dom/dom_elements";
+import { barContainer1,speedInput,arrContainer } from "../../dom/dom_elements";
 import { heapify,deleteMaxHeapify } from "./HeapDSMethods";
 
 const arr = barContainer1.children
@@ -736,6 +736,94 @@ async function strandSort(output: HTMLDivElement){
 
 
 
+
+
+
+async function patienceSort(){
+  const howFast: number = Number(speedInput.value);
+  const n: number = arr.length
+  // this is a 2d array
+	let piles: Array<Array<HTMLElement>> = [];
+
+	for (let i=0; i<n; i++) {
+    const ele = arr[i] as HTMLElement;
+		if (piles.length===0) {
+      piles.push([ele]);
+		}else {
+			let flag: boolean = true;
+			for (let pile of piles) {
+        const topeleOfPile: number = getHeightNode(pile[pile.length-1]);
+				if (getHeightNode(ele) < topeleOfPile) {
+					pile.push(ele);
+					flag = false;
+					break;
+				}
+			}
+			if (flag) {
+        piles.push([ele]);
+			}
+		}
+	}
+  const newArr = document.createElement("div");
+  newArr.classList.add("arr-style")
+  arrContainer.append(newArr);
+  for(let pile of piles){
+    const div = document.createElement("div");
+    div.classList.add("pile")
+    newArr.append(div);
+
+    for(let val of pile){
+      val.style.background = "#ca50f6";
+      await delay(howFast);
+    }
+    for(let val of pile){
+      div.append(val);
+      await delay(howFast);
+    }
+
+  }
+  console.log(piles)
+
+  let min = Number.MAX_SAFE_INTEGER;
+  let posToBeDeleted!: number;
+  for(let i=0; i<n; i++){
+    for(let j=0; j<piles.length; j++){
+      const pile: Array<HTMLElement> = piles[j]
+      if(!pile.length) continue
+      const lastIdx: number = pile.length-1;
+      const lastVal: number = getHeightNode(pile[lastIdx])
+
+      pile[lastIdx].style.backgroundColor = "yellow";
+      await delay(howFast)
+
+      if(lastVal<min){
+        min = lastVal;
+        posToBeDeleted = j;
+      }
+    }
+    
+    for(let j=0; j<piles.length; j++){
+      const pile: Array<HTMLElement> = piles[j]
+      if(!pile.length) continue
+      const lastIdx: number = pile.length-1;
+      pile[lastIdx].style.backgroundColor = unsortedColor;
+    }
+    const lastIdx: number = piles[posToBeDeleted].length-1
+    
+    piles[posToBeDeleted][lastIdx].style.backgroundColor = sortedColor;
+    await delay(howFast)
+    
+    barContainer1.append(piles[posToBeDeleted][lastIdx]);
+    await delay(howFast)
+    
+    
+
+    piles[posToBeDeleted].pop()
+    min = Number.MAX_SAFE_INTEGER
+  }
+}
+
+
 export {
   bubbleSort,
   insertionSort,
@@ -750,5 +838,6 @@ export {
   combSort,
   cycleSort,
   timSort,
-  strandSort
+  strandSort,
+  patienceSort
 };

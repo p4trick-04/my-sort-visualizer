@@ -1,7 +1,6 @@
 /*
 The purpose this kind of structure is to make the code more readable.
 */
-
 // the html
 import Header from "./componenets/headers/Header";
 import Bar1 from "./componenets/Bar1";

@@ -16,7 +16,7 @@ import {
 
 
 export default function(){
-  // initial array. set all of the array with random height
+  // // initial array. set all of the array with random height
   for(let i=0; i<Number(dom.sizeRange.value); i++){
     const div = document.createElement("div") as HTMLDivElement;
     setRandHeight(div);
@@ -118,6 +118,9 @@ export default function(){
         break;
 
         
+      case "Patience sort":
+        await sort.patienceSort();
+        break;
       default:
         return;
       
@@ -127,12 +130,12 @@ export default function(){
     dom.startBtn.disabled = false;
     aTimer.stop();
   
-    // last animation
-    for(let i=0; i<dom.barContainer1.childElementCount; i++){
-      dom.barContainer1.children[i].style.backgroundColor = "lightblue";
-      await delay(5)
-      dom.barContainer1.children[i].style.backgroundColor = sortedColor;
-    }
+    // // last animation
+    // for(let i=0; i<dom.barContainer1.childElementCount; i++){
+    //   dom.barContainer1.children[i].style.backgroundColor = "lightblue";
+    //   await delay(5)
+    //   dom.barContainer1.children[i].style.backgroundColor = sortedColor;
+    // }
   
   
   }

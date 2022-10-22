@@ -11,13 +11,23 @@
   // uncomment this if I want the bar stick at the bottom together
   // align-items: flex-end;
   & > div{
-    // border-radius: 2px;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    // border-top-left-radius: ;
-    // border-top-right-radius: ;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     background-color: #F65050;
     width: 25%;
-    // transition: 0.2s all ease;
+    // position: absolute;
+
+  }
+  .pile{
+    position: relative;
+    & > div{
+      box-shadow: 0px 2px 1px #1c1c1c;
+      border-bottom: 1px solid black;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      background-color: #F65050;
+      width: 80%;
+      position: absolute;
+    }
   }
 }
