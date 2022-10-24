@@ -114,10 +114,7 @@ export default function(){
           await delay(5)
           output.children[i].style.backgroundColor = sortedColor;
         }
-
-        break;
-
-        
+        return;
       case "Patience sort":
         await sort.patienceSort();
         break;
@@ -130,12 +127,12 @@ export default function(){
     dom.startBtn.disabled = false;
     aTimer.stop();
   
-    // // last animation
-    // for(let i=0; i<dom.barContainer1.childElementCount; i++){
-    //   dom.barContainer1.children[i].style.backgroundColor = "lightblue";
-    //   await delay(5)
-    //   dom.barContainer1.children[i].style.backgroundColor = sortedColor;
-    // }
+    // last animation
+    for(let i=0; i<dom.barContainer1.childElementCount; i++){
+      dom.barContainer1.children[i].style.backgroundColor = "lightblue";
+      await delay(5)
+      dom.barContainer1.children[i].style.backgroundColor = sortedColor;
+    }
   
   
   }
