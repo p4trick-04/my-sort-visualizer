@@ -81,9 +81,10 @@ async function insertionSort(left=0,right=0){
         await delay(howFast);
   
         swapForArr(arr,j,j+1);
-  
+        for(let k=i; k>=0; k--){
+          arr[k].style.backgroundColor = sortedColor;
+        }
         j--;
-        arr[k].style.backgroundColor = sortedColor;
       }
       element_i.style.backgroundColor = sortedColor;
     }
