@@ -776,6 +776,46 @@ async function patienceSort(){
 }
 
 
+
+
+
+async function oddEvenSort(){
+  const howFast: number = Number(speedInput.value);
+
+  let isSorted = false;
+  const n = arr.length;
+  while (!isSorted){
+    isSorted = true;
+
+    // Perform Bubble sort on odd indexed element
+    for (let i=1; i<=n-2; i+=2){
+      arr[i].style.backgroundColor = "yellow"
+      arr[i+1].style.backgroundColor = "yellow"
+      await delay(howFast);
+      if (getHeightNode(arr[i]) > getHeightNode(arr[i+1])){
+        swapForArr(arr,i,i+1)
+        isSorted = false;
+      }
+      arr[i].style.backgroundColor = unsortedColor
+      arr[i+1].style.backgroundColor = unsortedColor
+    }
+
+    // Perform Bubble sort on even indexed element
+    for (let i=0; i<=n-2; i=i+2){
+      arr[i].style.backgroundColor = "yellow"
+      arr[i+1].style.backgroundColor = "yellow"
+      await delay(howFast);
+      if (getHeightNode(arr[i]) > getHeightNode(arr[i+1])){
+        swapForArr(arr,i,i+1)
+        isSorted = false;
+      }
+      arr[i].style.backgroundColor = unsortedColor
+      arr[i+1].style.backgroundColor = unsortedColor
+    }
+  }
+}
+
+
 export {
   bubbleSort,
   insertionSort,
@@ -791,5 +831,6 @@ export {
   cycleSort,
   timSort,
   strandSort,
-  patienceSort
+  patienceSort,
+  oddEvenSort
 };

@@ -118,6 +118,9 @@ export default function(){
       case "Patience sort":
         await sort.patienceSort();
         break;
+      case "Odd-even sort":
+        await sort.oddEvenSort();
+        break;
       default:
         return;
       
