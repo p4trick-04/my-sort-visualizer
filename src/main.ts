@@ -48,7 +48,6 @@ export default function(){
   dom.startBtn.addEventListener("click", startAlgo);
   
   async function startAlgo(){
-    console.log("start shit")
     if(!algoProperties.algo) return;
     if(algoProperties.isSorted) {
       console.log("already sorted!")
@@ -120,6 +119,9 @@ export default function(){
         break;
       case "Odd-even sort":
         await sort.oddEvenSort();
+        break;
+      case "Gnome sort":
+        await sort.gnomeSort();
         break;
       default:
         return;

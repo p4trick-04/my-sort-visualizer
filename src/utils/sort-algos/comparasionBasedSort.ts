@@ -816,6 +816,35 @@ async function oddEvenSort(){
 }
 
 
+
+
+async function gnomeSort(){
+  const howFast: number = Number(speedInput.value);
+  let index: number = 0;
+  const n: number = arr.length;
+
+  while (index < n) {
+    if (index == 0) index++;
+    arr[index-1].style.backgroundColor = "yellow";
+    arr[index].style.backgroundColor = "yellow"
+    await delay(howFast);
+
+    if (getHeightNode(arr[index-1]) > getHeightNode(arr[index])){
+      swapForArr(arr,index,index-1)
+      arr[index-1].style.backgroundColor = unsortedColor;
+      arr[index].style.backgroundColor = unsortedColor
+      index--;
+    }else {
+      arr[index-1].style.backgroundColor = unsortedColor;
+      arr[index].style.backgroundColor = unsortedColor
+      index++;
+    }
+  }
+}
+
+
+
+
 export {
   bubbleSort,
   insertionSort,
@@ -832,5 +861,6 @@ export {
   timSort,
   strandSort,
   patienceSort,
-  oddEvenSort
+  oddEvenSort,
+  gnomeSort
 };
