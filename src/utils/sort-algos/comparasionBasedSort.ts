@@ -867,6 +867,53 @@ async function exchangeSort(){
 
 
 
+async function isSorted(a:HTMLCollection,howFast: number){
+  for(var i = 1; i < arr.length; i++){
+    a[i].style.backgroundColor = "yellow";
+    a[i-1].style.backgroundColor = "yellow";
+    await delay(howFast)
+    if (getHeightNode(a[i]) < getHeightNode(a[i-1])){
+      a[i].style.backgroundColor = unsortedColor;
+      a[i-1].style.backgroundColor = unsortedColor;
+      return false;
+    }
+    a[i].style.backgroundColor = sortedColor;
+    a[i-1].style.backgroundColor = sortedColor;
+  }
+  return true;
+}
+
+// To generate permutation of the array
+async function shuffle(a:HTMLCollection, n: number,howFast: number){
+  const j=n;
+  for (let i=0; i<n; i++){
+    // 0 <= idx < n
+    const idx = Math.floor(Math.random() * n);
+    arr[j-i-1].style.backgroundColor = "skyblue";
+    arr[idx].style.backgroundColor = "skyblue";
+    await delay(howFast)
+    swapForArr(a, j-i-1, idx);
+    arr[j-i-1].style.backgroundColor = unsortedColor;
+    arr[idx].style.backgroundColor = unsortedColor;
+  }
+}
+
+async function bogoSort(){
+  const n: number = arr.length;
+  const howFast: number = Number(speedInput.value);
+
+  while (! await isSorted(arr,howFast))
+    await shuffle(arr, n,howFast);
+}
+
+
+
+
+
+
+
+
+
 export {
   bubbleSort,
   insertionSort,
@@ -885,5 +932,6 @@ export {
   patienceSort,
   oddEvenSort,
   gnomeSort,
-  exchangeSort
+  exchangeSort,
+  bogoSort
 };

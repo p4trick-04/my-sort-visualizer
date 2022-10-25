@@ -130,6 +130,9 @@ export default function(){
       case "LSD Radix sort":
         await integerSort.lsdRadixSort();
         break;
+      case "Bogosort":
+        await comparasionSort.bogoSort();
+        break;
       default:
         return;
       

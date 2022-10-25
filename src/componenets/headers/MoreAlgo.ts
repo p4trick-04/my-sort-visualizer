@@ -23,13 +23,10 @@ export default function MoreAlgo(){
     <div>
       <h3>Non-comparasion sorts(Integer)</h3>
       <ul class="more-algo-pick">
-        <li>Pigeonhole sort</li>
         <li>Bucket sort(uniform keys)</li>
         <li>Bucket sort(integer keys)</li>
-        <li>Counting sort</li>
         <li>LSD Radix sort</li>
         <li>MSD Radix sort</li>
-        <li>LSD Radix sort(in-place)</li>
         <li>Burstsort</li>
         <li>Flashsort</li>
         <li>Postman sort</li>
