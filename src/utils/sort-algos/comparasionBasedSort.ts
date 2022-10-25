@@ -845,6 +845,28 @@ async function gnomeSort(){
 
 
 
+
+async function exchangeSort(){
+  const howFast: number = Number(speedInput.value);
+
+  for(let i=0; i<arr.length; i++){
+    for(let j=i+1; j<arr.length; j++){
+      arr[i].style.backgroundColor = "yellow";
+      arr[j].style.backgroundColor = "yellow";
+      await delay(howFast)
+      if(getHeightNode(arr[i])>getHeightNode(arr[j])){
+        swapForArr(arr,i,j);
+      }
+      arr[j].style.backgroundColor = unsortedColor;
+      arr[i].style.backgroundColor = unsortedColor;
+    }
+    arr[i].style.backgroundColor = sortedColor;
+  }
+}
+
+
+
+
 export {
   bubbleSort,
   insertionSort,
@@ -862,5 +884,6 @@ export {
   strandSort,
   patienceSort,
   oddEvenSort,
-  gnomeSort
+  gnomeSort,
+  exchangeSort
 };

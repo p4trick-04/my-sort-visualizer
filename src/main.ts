@@ -123,6 +123,9 @@ export default function(){
       case "Gnome sort":
         await sort.gnomeSort();
         break;
+      case "Exchange sort":
+        await sort.exchangeSort();
+        break;
       default:
         return;
       
