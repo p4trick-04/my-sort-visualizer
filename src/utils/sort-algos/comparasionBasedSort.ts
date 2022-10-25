@@ -124,7 +124,8 @@ async function selectionSort() {
     }
 
     // now we give a color to the element that need to be swapped
-    arr[minIdx].style.backgroundColor = "yellow";
+    arr[i].style.backgroundColor = "skyblue";
+    arr[minIdx].style.backgroundColor = "skyblue";
     await delay(howFast);
 
 
