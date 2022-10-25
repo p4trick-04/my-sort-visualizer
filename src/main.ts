@@ -133,6 +133,9 @@ export default function(){
       case "Bogosort":
         await comparasionSort.bogoSort();
         break;
+      case "Pancake sort":
+        await comparasionSort.pancakeSort();
+        break;
       default:
         return;
       

@@ -909,6 +909,48 @@ async function bogoSort(){
 
 
 
+async function flip(arr: HTMLCollection, right: number,flipNth: number, howFast: number){
+  let left = 0;
+  let right2 = right;
+  while (left < right){
+    arr[left].style.backgroundColor = "yellow";
+    arr[right].style.backgroundColor = "yellow";
+    await delay(howFast);
+
+    swapForArr(arr,left,right);
+    arr[left].style.backgroundColor = unsortedColor;
+    arr[right].style.backgroundColor = unsortedColor;
+    left++;
+    right--;
+  }
+
+  if(flipNth===2){
+    arr[right2].style.backgroundColor = sortedColor;
+    await delay(howFast);
+  }
+}
+
+async function findMaxIdx(arr: HTMLCollection, n: number){
+  let index: number = 0;
+  for (let i=0; i<n; ++i){
+    if (getHeightNode(arr[i]) > getHeightNode(arr[index])){
+      index = i;
+    }
+  }
+  return index;
+}
+
+
+async function pancakeSort(){
+  const n: number = arr.length;
+  const howFast: number = Number(speedInput.value);
+
+  for(let size=n-1; size>=0; size--){
+    let maxVal: number = await findMaxIdx(arr,size);
+    await flip(arr, maxVal, 1, howFast);
+    await flip(arr, size, 2, howFast);
+  }
+}
 
 
 
@@ -934,5 +976,6 @@ export {
   oddEvenSort,
   gnomeSort,
   exchangeSort,
-  bogoSort
+  bogoSort,
+  pancakeSort
 };

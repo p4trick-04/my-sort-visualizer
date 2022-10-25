@@ -36,7 +36,7 @@ export default function MoreAlgo(){
       <h3>Other sorts</h3>
       <ul class="more-algo-pick">
         <li>Bead sort</li>
-        <li>Simple pancake sort(uniform keys)</li>
+        <li>Pancake sort</li>
         <li>"I Can't Believe It Can" sort</li>
         <li>Spaghetti (Poll) sort</li>
         <li>Bitonic sort</li>
