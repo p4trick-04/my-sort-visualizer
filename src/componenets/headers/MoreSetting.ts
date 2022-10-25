@@ -27,15 +27,8 @@ export default function MoreSetting(){
           <p>Gap</p>
         </div>
         <div>
-          <input type="checkbox" class="pseudocode">
-          <p>pseudocode</p>
-        </div>
-        <div>
           <input type="checkbox" class="compare-algo">
           <p>compare algorithm</p>
-        </div>
-        <div>
-          <p>array model</p>
         </div>
       </div>
     </div>

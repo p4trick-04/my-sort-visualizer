@@ -7,18 +7,13 @@ export default function MoreAlgo(){
       <ul class="more-algo-pick">
         <li>Quick sort (Hoare Partition)</li>
         <li>In-place merge sort</li>
-        <li>Intro sort</li>
         <li>Heap sort</li>
-        <li>Block sort</li>
         <li>Tim sort</li>
         <li>Shell sort</li>
         <li>Exchange sort</li>
-        <li>Tree sort</li>
         <li>Cycle sort</li>
         <li>Patience sort</li>
-        <li>Smooth sort</li>
         <li>Strand sort</li>
-        <li>Tournament sort</li>
         <li>Coktail shaker sort</li>
         <li>Comb sort</li>
         <li>Gnome sort</li>

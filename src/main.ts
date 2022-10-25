@@ -4,7 +4,8 @@ import algoCategory from "./utils/algoCategory";
 import moreSetting from "./utils/moreSetting";
 import setSpeed from './utils/setSpeed';
 import { sortedColor } from './utils/colors';
-import * as sort from './utils/sort-algos/comparasionBasedSort';
+import * as comparasionSort from './utils/sort-algos/comparasionBasedSort';
+import * as integerSort from './utils/sort-algos/integerSorts';
 import * as dom from "./dom/dom_elements";
 import StopWatch from "./utils/StopWatch";
 import {
@@ -61,40 +62,40 @@ export default function(){
     console.log(algoProperties.algo);
     switch(algoProperties.algo){
       case "Bubble":
-        await sort.bubbleSort();
+        await comparasionSort.bubbleSort();
         break;
       case "Insertion":
-        await sort.insertionSort();
+        await comparasionSort.insertionSort();
         break;
       case "Selection":
-        await sort.selectionSort();
+        await comparasionSort.selectionSort();
         break;
       case "Merge":
-        await sort.mergeSort();
+        await comparasionSort.mergeSort();
         break;
       case "Quick (Lomuto Partition)":
-        await sort.quickSortLomuto();
+        await comparasionSort.quickSortLomuto();
         break;
       case "Heap sort":
-        await sort.heapSort();
+        await comparasionSort.heapSort();
         break;
       case "In-place merge sort":
-        await sort.mergeSortInplace();
+        await comparasionSort.mergeSortInplace();
         break;
       case "Shell sort":
-        await sort.shellSort();
+        await comparasionSort.shellSort();
         break;
       case "Coktail shaker sort":
-        await sort.cocktailSort();
+        await comparasionSort.cocktailSort();
         break;
       case "Comb sort":
-        await sort.combSort();
+        await comparasionSort.combSort();
         break;
       case "Cycle sort":
-        await sort.cycleSort();
+        await comparasionSort.cycleSort();
         break;
       case "Tim sort":
-        await sort.timSort();
+        await comparasionSort.timSort();
         break;
       case "Strand sort":
         // const newArr: Array<HTMLElement> = [];
@@ -102,7 +103,7 @@ export default function(){
         output.classList.add("arr-style");
 
         dom.arrContainer.appendChild(output)
-        await sort.strandSort(output);
+        await comparasionSort.strandSort(output);
         dom.barContainer1.remove();
 
         output.classList.add("bar-container-1");
@@ -115,16 +116,19 @@ export default function(){
         }
         return;
       case "Patience sort":
-        await sort.patienceSort();
+        await comparasionSort.patienceSort();
         break;
       case "Odd-even sort":
-        await sort.oddEvenSort();
+        await comparasionSort.oddEvenSort();
         break;
       case "Gnome sort":
-        await sort.gnomeSort();
+        await comparasionSort.gnomeSort();
         break;
       case "Exchange sort":
-        await sort.exchangeSort();
+        await comparasionSort.exchangeSort();
+        break;
+      case "LSD Radix sort":
+        await integerSort.lsdRadixSort();
         break;
       default:
         return;
