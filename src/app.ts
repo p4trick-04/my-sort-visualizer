@@ -16,8 +16,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `;
 
 // core logic(DOM, algo sorting, etc)
-let {default: main} = await import('./main');
-main();
+(async () => {
+
+  let {default: main} = await import('./main');
+  main();
+})()
 
 /* Resources:
 https://javascript.info/modules-dynamic-imports

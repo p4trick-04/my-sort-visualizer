@@ -1,3 +1,4 @@
+// @ts-nocheck
 interface AlgoProperties{
   isSorted: boolean,
   algo: string,

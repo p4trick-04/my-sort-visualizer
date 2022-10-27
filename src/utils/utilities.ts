@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Get a random number between given value.
  * @param interval Max number to be generated

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {getRandNum,setRandHeight} from "./utilities"
 
 export default function shuffleArray(barContainer1: HTMLElement){

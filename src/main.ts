@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import resizeArray from "./utils/resizeArray";
 import shuffleArray from "./utils/shuffleArray";
 import algoCategory from "./utils/algoCategory";

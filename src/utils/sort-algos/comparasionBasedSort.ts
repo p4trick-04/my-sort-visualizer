@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { delay, printHTMLCollection,getHeightNode,swapForArr } from "../utilities";
 import { unsortedColor,sortedColor } from "../colors";
 import { barContainer1,speedInput,arrContainer } from "../../dom/dom_elements";

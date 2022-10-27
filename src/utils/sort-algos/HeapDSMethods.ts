@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { unsortedColor } from "../colors";
 import { swapForArr,delay,getHeightNode } from "../utilities";
 
