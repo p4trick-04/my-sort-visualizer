@@ -955,7 +955,41 @@ async function pancakeSort(){
 
 
 
+async function stoogeSortUtil(l: number, h: number, howFast: number) {
+  if (l >= h){
+    return;
+  }
 
+  arr[l].style.backgroundColor = "yellow";
+  arr[h].style.backgroundColor = "yellow";
+  await delay(howFast)
+  if (getHeightNode(arr[l]) > getHeightNode(arr[h])) {
+    swapForArr(arr,l,h)
+  }
+  arr[l].style.backgroundColor = unsortedColor;
+  arr[h].style.backgroundColor = unsortedColor;
+
+  if (h+1-l> 2) {
+    let t = Math.floor((h+1 - l) / 3);
+
+    // Recursively sort first
+    // 2/3 elements
+    await stoogeSortUtil(l, h-t, howFast);
+
+    // Recursively sort last
+    // 2/3 elements
+    await stoogeSortUtil(l+t, h, howFast);
+
+    // Recursively sort first
+    // 2/3 elements again to
+    // confirm
+    await stoogeSortUtil(l, h-t, howFast);
+  }
+}
+async function stoogeSort(){
+  const howFast: number = Number(speedInput.value);
+  await stoogeSortUtil(0, arr.length-1, howFast)
+}
 
 export {
   bubbleSort,
@@ -977,5 +1011,6 @@ export {
   gnomeSort,
   exchangeSort,
   bogoSort,
-  pancakeSort
+  pancakeSort,
+  stoogeSort
 };
