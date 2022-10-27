@@ -139,6 +139,9 @@ export default function(){
       case "Stooge sort":
         await comparasionSort.stoogeSort();
         break;
+      case "Slowsort":
+        await comparasionSort.slowSort();
+        break;
       default:
         return;
       

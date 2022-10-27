@@ -991,6 +991,41 @@ async function stoogeSort(){
   await stoogeSortUtil(0, arr.length-1, howFast)
 }
 
+
+
+
+
+async function slowSortUtil(i:number, j: number,howFast: number) {
+  if (i >= j)
+    return;
+  let m = Math.floor((i + j)/2);
+
+  await slowSortUtil( i, m,howFast);
+  await slowSortUtil(m + 1, j,howFast);
+
+  arr[j].style.backgroundColor = "yellow";
+  arr[m].style.backgroundColor = "yellow";
+  await delay(howFast)
+
+  if (getHeightNode(arr[j]) < getHeightNode(arr[m])) {
+    swapForArr(arr,j,m)
+  }
+
+  arr[j].style.backgroundColor = unsortedColor;
+  arr[m].style.backgroundColor = unsortedColor;
+
+  await slowSortUtil(i, j - 1,howFast);
+}
+
+async function slowSort(){
+  const howFast: number = Number(speedInput.value);
+  await slowSortUtil(0, arr.length-1, howFast);
+}
+
+
+
+
+
 export {
   bubbleSort,
   insertionSort,
@@ -1012,5 +1047,6 @@ export {
   exchangeSort,
   bogoSort,
   pancakeSort,
-  stoogeSort
+  stoogeSort,
+  slowSort
 };

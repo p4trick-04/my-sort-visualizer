@@ -6,7 +6,7 @@ export default function Settings(){
   div.innerHTML = `
     <div class="setting-section">
       ${MainSetting()}
-      ${MoreSetting()}
+      <!--${MoreSetting()}-->
     </div>
   `;
   return div.innerHTML;
