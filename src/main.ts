@@ -1,7 +1,7 @@
 import resizeArray from "./utils/resizeArray";
 import shuffleArray from "./utils/shuffleArray";
 import algoCategory from "./utils/algoCategory";
-import moreSetting from "./utils/moreSetting";
+// import moreSetting from "./utils/moreSetting";
 import setSpeed from './utils/setSpeed';
 import { sortedColor } from './utils/colors';
 import * as comparasionSort from './utils/sort-algos/comparasionBasedSort';
@@ -32,19 +32,22 @@ export default function(){
     algo:"",
   }
   
+  // timer
+  var a = document.getElementById("a-timer");
+  const aTimer = new StopWatch(a);
+  
   resizeArray(dom.barContainer1, dom.sizeRange, dom.sizeInput);
   setSpeed(dom.speedInput,dom.speedVerbose);
   dom.shuffleArrayBtn.addEventListener("click",() => {
     shuffleArray(dom.barContainer1)
     algoProperties.isSorted = false;
+    aTimer.reset();
+
   });
   algoCategory(dom.algoMenu, dom.algoMenuLine, dom.moreAlgoContainer, dom.moreAlgoBtn, dom.moreAlgoPick, algoProperties);
-  moreSetting(dom.moreSettingBtn, dom.moreSettingDisplay, dom.exitBtn,dom.checkBox_List,dom.barContainer1);
+  // moreSetting(dom.moreSettingBtn, dom.moreSettingDisplay, dom.exitBtn,dom.checkBox_List,dom.barContainer1);
   
   
-  // timer
-  var a = document.getElementById("a-timer");
-  const aTimer = new StopWatch(a);
   
   dom.startBtn.addEventListener("click", startAlgo);
   
@@ -59,6 +62,7 @@ export default function(){
 
     aTimer.start();
     dom.startBtn.disabled = true;
+    dom.shuffleArrayBtn.disabled = true;
     console.log(algoProperties.algo);
     switch(algoProperties.algo){
       case "Bubble":
@@ -149,6 +153,8 @@ export default function(){
     
     algoProperties.isSorted = true;
     dom.startBtn.disabled = false;
+    dom.shuffleArrayBtn.disabled = false;
+
     aTimer.stop();
   
     // last animation
