@@ -3,7 +3,6 @@ interface AlgoProperties{
   isSorted: boolean,
   algo: string,
 }
-
 export default function algoCategory(
   algoMenu: HTMLUListElement,
   algoMenuLine: HTMLLIElement,
@@ -59,7 +58,7 @@ export default function algoCategory(
       leftDef = calcPosition;
       isFirstTime=false;
 
-      algoProperties.algo = algoMenu.children[i].textContent
+      algoProperties.algo = algoMenu.children[i].textContent!
     });
   }
   
@@ -81,7 +80,8 @@ export default function algoCategory(
   });
 
   moreAlgoPick.forEach((algo) => {
-    for(let i=0; i<algo.childElementCount; i++){
+
+    for(let i=0; i<(algo as HTMLElement).childElementCount; i++){
       // console.log(algo.children[i]);
       algo.children[i].addEventListener("click", function(){
         algoMenuLine.style.width = 0 + "px";

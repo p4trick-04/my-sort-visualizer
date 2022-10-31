@@ -116,9 +116,10 @@ export default function(){
 
         // last animation
         for(let i=0; i<output.childElementCount; i++){
-          output.children[i].style.backgroundColor = "lightblue";
+          const ele = output.children[i] as HTMLElement
+          ele.style.backgroundColor = "lightblue";
           await delay(5)
-          output.children[i].style.backgroundColor = sortedColor;
+          ele.style.backgroundColor = sortedColor;
         }
         return;
       case "Patience sort":
@@ -161,9 +162,10 @@ export default function(){
   
     // last animation
     for(let i=0; i<dom.barContainer1.childElementCount; i++){
-      dom.barContainer1.children[i].style.backgroundColor = "lightblue";
+      const ele = dom.barContainer1.children[i] as HTMLElement
+      ele.style.backgroundColor = "lightblue";
       await delay(5)
-      dom.barContainer1.children[i].style.backgroundColor = sortedColor;
+      ele.style.backgroundColor = sortedColor;
     }
   
   

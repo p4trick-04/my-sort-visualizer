@@ -1,0 +1,12 @@
+.shuffle-array{
+  border-radius: 25%;
+  height: fit-content;
+  align-self: center;
+  background-color: transparent;
+  &:hover{
+    transition-duration: 500ms;
+    background-color: black;
+    color: whitesmoke;
+    box-shadow: 0px 0px 3px 5px white;
+  }
+}

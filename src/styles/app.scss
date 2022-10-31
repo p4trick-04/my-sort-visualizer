@@ -56,23 +56,9 @@ header{
       }
     }
 
-    .shuffle-array{
-      border-radius: 25%;
-      height: fit-content;
-      align-self: center;
-      background-color: transparent;
-      &:hover{
-        transition-duration: 500ms;
-        background-color: black;
-        color: whitesmoke;
-        box-shadow: 0px 0px 3px 5px white;
-      }
-    }
 
-    .main-setting{
-      display: flex;
-      flex-direction: column;
-    }
+
+
 
     .more-setting{
       width: max-content;
@@ -100,26 +86,7 @@ header{
     .size-input:hover{
       cursor: pointer;
     }
-
-    .size-input{
-      background-color: whitesmoke;
-      border: 1px solid gray;
-      border-radius: 5px;
-      padding-left: 3px;
-      padding-right: 3px;
-      // if the size-input clicked
-      &:focus{
-        background-color: white;
-        cursor: text;
-        border: 0;
-      }
-      &:focus-visible{
-        border: 0;
-      }
-    }
   }
-  
-
 }
 
 #a-timer{

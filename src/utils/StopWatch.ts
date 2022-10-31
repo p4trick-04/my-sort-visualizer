@@ -6,7 +6,7 @@ const StopWatch = function(elem: HTMLElement, options?: Options) {
   var timer: HTMLSpanElement = createTimer(),
     offset: number,
     clock: number,
-    interval: number
+    interval: number | null
   ;
 
   // default options

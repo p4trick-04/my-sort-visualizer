@@ -1,0 +1,16 @@
+.size-input{
+  background-color: whitesmoke;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
+  // if the size-input clicked
+  &:focus{
+    background-color: white;
+    cursor: text;
+    border: 0;
+  }
+  &:focus-visible{
+    border: 0;
+  }
+}

@@ -4,7 +4,7 @@ import { unsortedColor,sortedColor } from "../colors";
 import { barContainer1,speedInput,arrContainer } from "../../dom/dom_elements";
 import { heapify,deleteMaxHeapify } from "./HeapDSMethods";
 
-const arr = barContainer1.children
+const arr = barContainer1.children as HTMLCollection
 
 
 

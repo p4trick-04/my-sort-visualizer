@@ -1,0 +1,8 @@
+.main-setting{
+  display: flex;
+  flex-direction: column;
+  .elements-input{
+    display: inline-flex;
+    column-gap: 0.2rem;
+  }
+}

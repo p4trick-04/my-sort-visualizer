@@ -1,4 +1,6 @@
 import "../../styles/tool_tip.scss";
+import "../../styles/main_setting.scss";
+import "../../styles/size_input.scss";
 
 export default function MainSetting(){
   const div = document.createElement("div");
@@ -10,7 +12,7 @@ export default function MainSetting(){
           <!-- range bar input  here -->
           <input type="range" class="size-range" min="8" max="500" value="8">
           
-          <span>
+          <span class="elements-input">
             <!-- user input here -->
             <input type="text" class="size-input" minlength="1" maxlength="3">
             <span>Elements</span>
