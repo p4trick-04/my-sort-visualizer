@@ -1,5 +1,12 @@
-### npm install
-Install dependencies.
+### Install dependencies.
+```
+npm install 
+```
 
-### npm run dev
-Runs the app in the development mode.
+### Runs the app in the development mode.
+```
+npm run dev
+```
+
+### Demo App
+https://sort-illust.netlify.app/
